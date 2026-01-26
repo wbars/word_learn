@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+  # Databases
+  db_en:
+    image: postgres:15-alpine
+    container_name: word_learn_db_en
+    environment:
+      POSTGRES_USER: word_learn
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: word_learn_en
+    volumes:
+      - pg_data_en:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U word_learn -d word_learn_en"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  db_dutch:
+    image: postgres:15-alpine
+    container_name: word_learn_db_dutch
+    environment:
+      POSTGRES_USER: word_learn
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_DB: word_learn_dutch
+    volumes:
+      - pg_data_dutch:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U word_learn -d word_learn_dutch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Bot instances
+  bot_en:
+    build: .
+    container_name: word_learn_bot_en
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN_EN}
+      DATABASE_URL: postgresql://word_learn:${DB_PASSWORD:-password}@db_en:5432/word_learn_en
+      SOURCE_LANG: en
+      TARGET_LANG: ru
+      TZ: Europe/Amsterdam
+    depends_on:
+      db_en:
+        condition: service_healthy
+    restart: unless-stopped
+
+  bot_dutch:
+    build: .
+    container_name: word_learn_bot_dutch
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN_DUTCH}
+      DATABASE_URL: postgresql://word_learn:${DB_PASSWORD:-password}@db_dutch:5432/word_learn_dutch
+      SOURCE_LANG: nl
+      TARGET_LANG: en
+      TZ: Europe/Amsterdam
+    depends_on:
+      db_dutch:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Reminder crons (one per bot)
+  reminder_en:
+    build: .
+    container_name: word_learn_reminder_en
+    command: python scripts/run_reminders.py
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN_EN}
+      DATABASE_URL: postgresql://word_learn:${DB_PASSWORD:-password}@db_en:5432/word_learn_en
+      TZ: Europe/Amsterdam
+    depends_on:
+      db_en:
+        condition: service_healthy
+    restart: unless-stopped
+
+  reminder_dutch:
+    build: .
+    container_name: word_learn_reminder_dutch
+    command: python scripts/run_reminders.py
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN_DUTCH}
+      DATABASE_URL: postgresql://word_learn:${DB_PASSWORD:-password}@db_dutch:5432/word_learn_dutch
+      TZ: Europe/Amsterdam
+    depends_on:
+      db_dutch:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pg_data_en:
+  pg_data_dutch:
