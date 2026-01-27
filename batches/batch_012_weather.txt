@@ -1,0 +1,79 @@
+# Batch 012: Weather
+# Format: Dutch|Russian
+
+# === WEATHER CONDITIONS ===
+het weer|погода
+de zon|солнце
+de wolk|облако
+de regen|дождь
+de bui|ливень
+de onweersbui|гроза
+de donder|гром
+de bliksem|молния
+de hagel|град
+de sneeuw|снег
+de mist|туман
+de wind|ветер
+de storm|буря, шторм
+
+# === WEATHER ADJECTIVES ===
+zonnig|солнечно
+bewolkt|облачно
+regenachtig|дождливо
+mistig|туманно
+winderig|ветрено
+stormachtig|штормовой
+warm|тёплый
+koud|холодный
+heet|жаркий
+fris|прохладный, свежий
+vochtig|влажный
+droog|сухой
+
+# === TEMPERATURE ===
+de temperatuur|температура
+de graad|градус
+onder nul|ниже нуля
+boven nul|выше нуля
+het vriest|морозит
+het dooit|тает
+
+# === WEATHER VERBS ===
+regenen|идёт дождь
+sneeuwen|идёт снег
+waaien|дуть (о ветре)
+schijnen|светить (о солнце)
+vriezen|морозить
+dooien|таять
+onweren|грозить (о погоде)
+
+# === SKY ===
+de lucht|небо, воздух
+de hemel|небо
+de regenboog|радуга
+de zonsopgang|восход
+de zonsondergang|закат
+
+# === SEASONS ===
+het seizoen|сезон
+de lente|весна
+de zomer|лето
+de herfst|осень
+de winter|зима
+
+# === WEATHER PHRASES ===
+Wat voor weer wordt het?|Какая будет погода?
+Het regent|Идёт дождь
+Het sneeuwt|Идёт снег
+Het waait hard|Дует сильный ветер
+De zon schijnt|Светит солнце
+Het is lekker weer|Хорошая погода
+Het is slecht weer|Плохая погода
+
+# === WEATHER ITEMS ===
+de paraplu|зонт
+de regenjas|дождевик
+de regenlaarzen|резиновые сапоги
+de zonnebril|солнечные очки
+de zonnebrand|солнцезащитный крем
+

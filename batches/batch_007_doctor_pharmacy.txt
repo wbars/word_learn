@@ -1,0 +1,56 @@
+# Batch 007: At the Doctor / Pharmacy
+# Format: Dutch|Russian
+
+# === MEDICAL PLACES ===
+de huisarts|семейный врач
+de huisartsenpraktijk|поликлиника
+het ziekenhuis|больница
+de spoedeisende hulp|скорая помощь
+de apotheek|аптека
+de tandarts|стоматолог
+het laboratorium|лаборатория
+
+# === MEDICAL STAFF ===
+de dokter|врач
+de arts|врач (формально)
+de specialist|специалист
+de verpleegkundige|медсестра/медбрат
+de apotheker|фармацевт
+de receptionist|регистратор
+
+# === MEDICAL PROCEDURES ===
+de afspraak|приём, запись
+het consult|консультация
+het onderzoek|обследование
+de bloedtest|анализ крови
+de röntgenfoto|рентген
+de vaccinatie|вакцинация
+de injectie|укол
+het recept|рецепт
+de verwijzing|направление
+
+# === MEDICINE ===
+het medicijn|лекарство
+de pil|таблетка
+de pijnstiller|обезболивающее
+de antibiotica|антибиотики
+de zalf|мазь
+de druppels|капли
+de pleister|пластырь
+het verband|бинт, повязка
+de thermometer|градусник
+
+# === MEDICAL VERBS ===
+een afspraak maken|записаться на приём
+onderzoeken|обследовать
+voorschrijven|выписывать (рецепт)
+innemen|принимать (лекарство)
+slikken|глотать
+smeren|намазывать
+verbinden|перевязывать
+
+# === USEFUL PHRASES ===
+Ik voel me niet lekker|Я плохо себя чувствую
+Ik heb pijn hier|У меня болит здесь
+Ik ben allergisch voor|У меня аллергия на
+Hoe vaak moet ik dit innemen?|Как часто принимать?

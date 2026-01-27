@@ -1,0 +1,82 @@
+# Batch 001: Essential Modal Verbs & Function Words
+# Format: Dutch|Russian
+# Nouns always include article (de/het)
+# 50 word pairs for critical gaps
+
+# === MODAL VERBS (infinitives - no article) ===
+willen|хотеть
+kunnen|мочь (способность)
+mogen|мочь (разрешение)
+moeten|быть должным
+zullen|буду (вспомогательный)
+hoeven|нужно (только с отрицанием)
+
+# === COMMON CONJUGATED FORMS ===
+ik wil|я хочу
+ik kan|я могу
+ik mag|мне можно
+ik moet|я должен
+
+# === PREPOSITIONS & DIRECTION ===
+naar|к, в (направление)
+tot|до
+vanaf|от, начиная с
+langs|вдоль, мимо
+tussen|между
+naast|рядом с
+tegenover|напротив
+achter|за, позади
+boven|над, наверху
+beneden|под, внизу
+
+# === ADVERBS - Quantity & Degree ===
+nog|ещё
+al|уже
+wel|ведь, всё-таки, да
+geen|никакой, нет
+veel|много
+weinig|мало
+genoeg|достаточно
+bijna|почти
+heel|очень
+zo|так
+
+# === VERBS - Mental (infinitives) ===
+weten|знать (факт)
+denken|думать
+geloven|верить
+begrijpen|понимать
+vergeten|забывать
+onthouden|запоминать
+leren|учить(ся)
+kennen|знать (быть знакомым)
+
+# === VERBS - Communication ===
+spreken|говорить
+praten|разговаривать
+verstaan|понимать (на слух)
+vertellen|рассказывать
+vragen|спрашивать
+antwoorden|отвечать
+betekenen|означать
+uitleggen|объяснять
+
+# === VERBS - Action ===
+beginnen|начинать
+eindigen|заканчивать
+stoppen|останавливаться
+wachten|ждать
+proberen|пытаться
+lukken|удаваться
+helpen|помогать
+zoeken|искать
+
+# === ADJECTIVES ===
+hoog|высокий
+laag|низкий
+duur|дорогой
+goedkoop|дешёвый
+makkelijk|лёгкий, простой
+moeilijk|трудный
+snel|быстрый
+langzaam|медленный

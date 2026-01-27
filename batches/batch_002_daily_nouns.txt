@@ -1,0 +1,84 @@
+# Batch 002: Daily Life Nouns (all with verified articles)
+# Format: Dutch|Russian
+# All nouns include de/het article
+# Sources: welklidwoord.nl, Van Dale dictionary
+
+# === PLACES - de-words ===
+de straat|улица
+de stad|город
+de winkel|магазин
+de supermarkt|супермаркет
+de markt|рынок
+de apotheek|аптека
+de bank|банк
+de bibliotheek|библиотека
+de kerk|церковь
+de school|школа
+de universiteit|университет
+
+# === PLACES - het-words ===
+het station|станция, вокзал
+het ziekenhuis|больница
+het kantoor|офис
+het restaurant|ресторан
+het café|кафе
+het park|парк
+het centrum|центр
+het gebouw|здание
+het museum|музей
+het postkantoor|почта
+
+# === HOME - de-words ===
+de kamer|комната
+de keuken|кухня
+de badkamer|ванная комната
+de slaapkamer|спальня
+de woonkamer|гостиная
+de deur|дверь
+de muur|стена
+de vloer|пол
+de trap|лестница
+de tuin|сад
+
+# === HOME - het-words ===
+het huis|дом
+het appartement|квартира
+het raam|окно
+het dak|крыша
+het balkon|балкон
+het toilet|туалет
+het bed|кровать
+het plafond|потолок
+
+# === TRANSPORT - de-words ===
+de auto|машина
+de fiets|велосипед
+de bus|автобус
+de tram|трамвай
+de metro|метро
+de trein|поезд
+de weg|дорога
+de brug|мост
+
+# === TRANSPORT - het-words ===
+het vliegtuig|самолёт
+het verkeer|движение, трафик
+het perron|платформа
+het ticket|билет
+
+# === TIME - de-words ===
+de dag|день
+de week|неделя
+de maand|месяц
+de ochtend|утро
+de middag|полдень
+de avond|вечер
+de nacht|ночь
+de minuut|минута
+
+# === TIME - het-words ===
+het jaar|год
+het uur|час
+het weekend|выходные
+het seizoen|сезон
+het moment|момент

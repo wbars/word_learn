@@ -1,0 +1,82 @@
+# Batch 011: Restaurant & Café
+# Format: Dutch|Russian
+
+# === PLACES ===
+het restaurant|ресторан
+het café|кафе
+de bar|бар
+de snackbar|закусочная
+het terras|терраса
+de afhaal|еда на вынос
+
+# === PEOPLE ===
+de ober|официант
+de serveerster|официантка
+de kok|повар
+de gast|гость
+
+# === MEAL PARTS ===
+het voorgerecht|закуска
+het hoofdgerecht|основное блюдо
+het nagerecht|десерт
+de soep|суп
+de salade|салат
+de snack|закуска, снэк
+
+# === MENU ===
+de menukaart|меню
+de wijnkaart|винная карта
+de dagschotel|блюдо дня
+het vegetarisch|вегетарианское
+het veganistisch|веганское
+de specialiteit|фирменное блюдо
+
+# === DRINKS ===
+het drankje|напиток
+het biertje|пиво (разг.)
+het wijntje|вино (разг.)
+de koffie verkeerd|кофе с молоком
+de cappuccino|капучино
+de espresso|эспрессо
+het sapje|сок (разг.)
+het water|вода
+plat water|вода без газа
+spa rood|газированная вода
+
+# === TABLEWARE ===
+het bestek|столовые приборы
+het servet|салфетка
+het bord|тарелка
+het glas|стакан
+de karaf|графин
+
+# === ORDERING ===
+bestellen|заказывать
+Mag ik de rekening?|Можно счёт?
+Ik wil graag...|Я бы хотел...
+Wat kunt u aanbevelen?|Что вы посоветуете?
+Heeft u vegetarische opties?|Есть вегетарианские варианты?
+De rekening, alstublieft|Счёт, пожалуйста
+apart betalen|платить раздельно
+samen betalen|платить вместе
+de fooi|чаевые
+
+# === TASTE ===
+lekker|вкусно
+heerlijk|восхитительно, очень вкусно
+zoet|сладкий
+zout|солёный
+zuur|кислый
+bitter|горький
+pittig|острый
+heet|горячий
+koud|холодный
+vers|свежий
+
+# === COOKING METHODS ===
+gebakken|жареный
+gekookt|варёный
+gegrild|на гриле
+rauw|сырой
+gestoomd|на пару
+

@@ -1,0 +1,57 @@
+# Batch 006: Healthcare & Body
+# Format: Dutch|Russian
+
+# === BODY PARTS - het-words ===
+het hoofd|голова
+het gezicht|лицо
+het oog|глаз
+het oor|ухо
+het haar|волосы
+het been|нога (вся)
+het lichaam|тело
+het hart|сердце
+
+# === BODY PARTS - de-words ===
+de mond|рот
+de neus|нос
+de tand|зуб
+de tong|язык
+de keel|горло
+de nek|шея
+de schouder|плечо
+de arm|рука (вся)
+de hand|кисть руки
+de vinger|палец (руки)
+de buik|живот
+de rug|спина
+de borst|грудь
+de voet|ступня
+de teen|палец (ноги)
+de knie|колено
+de huid|кожа
+
+# === HEALTH CONDITIONS ===
+de pijn|боль
+de hoofdpijn|головная боль
+de buikpijn|боль в животе
+de keelpijn|боль в горле
+de rugpijn|боль в спине
+de koorts|температура, жар
+de verkoudheid|простуда
+de griep|грипп
+de hoest|кашель
+de allergie|аллергия
+de infectie|инфекция
+de ontsteking|воспаление
+
+# === VERBS - Health ===
+pijn doen|болеть
+zich voelen|чувствовать себя
+hoesten|кашлять
+niezen|чихать
+bloeden|кровоточить
+braken|рвать (тошнить)
+zweten|потеть
+ademen|дышать
+rusten|отдыхать
+genezen|выздоравливать

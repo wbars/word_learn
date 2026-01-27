@@ -1,0 +1,79 @@
+# Batch 005: Supermarket & Food
+# Format: Dutch|Russian
+# Articles verified via welklidwoord.nl
+
+# === BREAD & DAIRY ===
+het brood|хлеб
+het broodje|булочка
+de boter|масло (сливочное)
+de kaas|сыр
+de melk|молоко
+de yoghurt|йогурт
+het ei|яйцо
+de eieren|яйца (мн.ч.)
+de room|сливки
+de kwark|творог
+
+# === MEAT & FISH ===
+het vlees|мясо
+de kip|курица
+het varkensvlees|свинина
+het rundvlees|говядина
+het gehakt|фарш
+de vis|рыба
+de zalm|лосось
+de garnalen|креветки
+
+# === FRUITS ===
+het fruit|фрукты
+de appel|яблоко
+de peer|груша
+de banaan|банан
+de sinaasappel|апельсин
+de citroen|лимон
+de aardbei|клубника
+de druiven|виноград
+
+# === VEGETABLES ===
+de groente|овощи
+de aardappel|картофель
+de tomaat|помидор
+de komkommer|огурец
+de ui|лук
+de knoflook|чеснок
+de wortel|морковь
+de paprika|перец (болгарский)
+de sla|салат (листовой)
+de spinazie|шпинат
+
+# === DRINKS ===
+het water|вода
+het sap|сок
+de koffie|кофе
+de thee|чай
+het bier|пиво
+de wijn|вино
+de frisdrank|газировка
+
+# === OTHER GROCERIES ===
+de rijst|рис
+de pasta|паста
+de suiker|сахар
+het zout|соль
+de peper|перец (специя)
+de olie|масло (растительное)
+de azijn|уксус
+het meel|мука
+de saus|соус
+de mayonaise|майонез
+de mosterd|горчица
+
+# === SHOPPING ===
+het winkelwagentje|тележка
+het mandje|корзинка
+de kassa|касса
+het bonnetje|чек
+de aanbieding|акция, скидка
+de prijs|цена
+goedkoop|дешёвый
+duur|дорогой

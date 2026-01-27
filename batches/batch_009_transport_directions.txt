@@ -1,0 +1,74 @@
+# Batch 009: Transport & Directions
+# Format: Dutch|Russian
+
+# === PUBLIC TRANSPORT ===
+de trein|поезд
+de bus|автобус
+de tram|трамвай
+de metro|метро
+het vliegtuig|самолёт
+de boot|лодка, корабль
+de veerboot|паром
+de taxi|такси
+
+# === TRANSPORT PLACES ===
+het station|станция, вокзал
+de halte|остановка
+de bushalte|автобусная остановка
+het perron|платформа, перрон
+de luchthaven|аэропорт
+de haven|порт
+
+# === VEHICLES ===
+de auto|машина
+de fiets|велосипед
+de motor|мотоцикл
+de scooter|скутер
+de bromfiets|мопед
+het busje|микроавтобус, фургон
+de vrachtwagen|грузовик
+
+# === TRANSPORT DOCUMENTS ===
+het kaartje|билет
+de OV-chipkaart|транспортная карта
+de enkele reis|билет в одну сторону
+de retour|билет туда-обратно
+het abonnement|абонемент
+de korting|скидка
+
+# === DIRECTIONS ===
+links|налево
+rechts|направо
+rechtdoor|прямо
+de hoek|угол
+het kruispunt|перекрёсток
+het stoplicht|светофор
+de brug|мост
+de tunnel|туннель
+
+# === POSITION ===
+naast|рядом с
+tegenover|напротив
+tussen|между
+voor|перед
+achter|за, позади
+bij|у, около
+dichtbij|близко
+ver|далеко
+
+# === TRANSPORT VERBS ===
+instappen|садиться (в транспорт)
+uitstappen|выходить (из транспорта)
+overstappen|пересаживаться
+vertrekken|отправляться
+aankomen|прибывать
+parkeren|парковаться
+tanken|заправляться
+afslaan|поворачивать
+
+# === USEFUL PHRASES ===
+Hoe kom ik bij...|Как добраться до...
+Waar is het station?|Где вокзал?
+Welk perron?|Какая платформа?
+Is deze plaats vrij?|Это место свободно?
+

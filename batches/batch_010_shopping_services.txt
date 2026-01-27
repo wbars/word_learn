@@ -1,0 +1,76 @@
+# Batch 010: Shopping & Services
+# Format: Dutch|Russian
+
+# === SHOPS ===
+de winkel|магазин
+de supermarkt|супермаркет
+de bakker|пекарня
+de slager|мясная лавка
+de groenteboer|овощной магазин
+de drogist|аптека (бытовая химия)
+de kledingwinkel|магазин одежды
+de schoenwinkel|обувной магазин
+de boekwinkel|книжный магазин
+de elektronicawinkel|магазин электроники
+het warenhuis|универмаг
+het winkelcentrum|торговый центр
+de markt|рынок
+
+# === SERVICES ===
+de kapper|парикмахер
+de stomerij|химчистка
+de wasserette|прачечная
+de fietsenmaker|веломастерская
+de garage|автосервис
+het postkantoor|почта
+de bibliotheek|библиотека
+
+# === SHOPPING VERBS ===
+kopen|покупать
+verkopen|продавать
+betalen|платить
+passen|примерять
+ruilen|обменивать
+terugbrengen|возвращать
+zoeken|искать
+vinden|находить
+kiezen|выбирать
+
+# === PAYMENT ===
+de prijs|цена
+de rekening|счёт
+het wisselgeld|сдача
+de pin|банковская карта
+contant|наличными
+pinnen|платить картой
+de korting|скидка
+de uitverkoop|распродажа
+gratis|бесплатно
+
+# === CLOTHING ===
+de broek|брюки
+de spijkerbroek|джинсы
+het shirt|футболка
+de trui|свитер
+de jas|куртка, пальто
+de jurk|платье
+de rok|юбка
+het overhemd|рубашка
+de schoenen|обувь, туфли
+de laarzen|сапоги
+de sokken|носки
+de muts|шапка
+de sjaal|шарф
+de handschoenen|перчатки
+
+# === SIZES ===
+de maat|размер
+klein|маленький
+groot|большой
+te groot|слишком большой
+te klein|слишком маленький
+breed|широкий
+smal|узкий
+lang|длинный
+kort|короткий
+

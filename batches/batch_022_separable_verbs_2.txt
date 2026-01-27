@@ -1,0 +1,64 @@
+# Batch 022: Separable Verbs (Part 2)
+# Format: Dutch|Russian
+# Note: These verbs split in present tense
+
+# === HOUSEHOLD ===
+openmaken|открывать
+dichtdoen|закрывать
+schoonmaken|убирать, чистить
+afwassen|мыть посуду
+opwarmen|разогревать
+klaarmaken|готовить (приготавливать)
+opbergen|убирать (на место)
+
+# === SHOPPING/MONEY ===
+uitgeven|тратить
+terugkrijgen|получать обратно
+afrekenen|расплачиваться
+uitzoeken|выбирать
+aanschaffen|приобретать
+meebrengen|приносить с собой
+
+# === TECHNOLOGY ===
+aanzetten|включать
+uitzetten|выключать
+opladen|заряжать
+downloaden|скачивать
+uploaden|загружать
+aansluiten|подключать
+afmelden|выходить (из аккаунта)
+aanmelden|регистрироваться, входить
+
+# === PLANS/ARRANGEMENTS ===
+afzeggen|отменять
+doorgeven|передавать (информацию)
+nakomen|выполнять (обещание)
+uitstellen|откладывать
+voorbereiden|готовить (подготавливать)
+regelen|организовывать
+afhalen|забирать
+
+# === SOCIAL ===
+kennismaken|знакомиться
+meedoen|участвовать
+opvallen|бросаться в глаза
+meemaken|переживать, испытывать
+bijdragen|вносить вклад
+uitkomen|выясняться, оказываться
+
+# === MORE COMMON VERBS ===
+achterlaten|оставлять
+bijhouden|вести (записи)
+doorbrengen|проводить (время)
+inhalen|догонять, наверстывать
+tegenkomen|встречать (случайно)
+thuiskomen|приходить домой
+weglopen|убегать
+
+# === EXAMPLES IN SENTENCES ===
+# dichtdoen: Doe de deur dicht = Закрой дверь
+# aanzetten: Zet de tv aan = Включи телевизор
+# afrekenen: Waar kan ik afrekenen? = Где я могу расплатиться?
+# thuiskomen: Hoe laat kom je thuis? = Во сколько ты придёшь домой?
+# meedoen: Doe je mee? = Ты участвуешь?
+

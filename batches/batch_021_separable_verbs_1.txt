@@ -1,0 +1,60 @@
+# Batch 021: Separable Verbs (Part 1)
+# Format: Dutch|Russian
+# Note: These verbs split in present tense: "Ik sta op" (I get up)
+
+# === DAILY ROUTINE ===
+opstaan|вставать
+wakker worden|просыпаться
+aankleden|одеваться
+uitkleden|раздеваться
+aandoen|надевать, включать
+uitdoen|снимать, выключать
+opruimen|убирать
+
+# === MOVEMENT ===
+weggaan|уходить
+terugkomen|возвращаться
+binnenkomen|входить
+uitgaan|выходить, гулять
+meegaan|идти вместе
+langskomen|заходить
+aankomen|прибывать
+vertrekken|отправляться
+instappen|садиться (в транспорт)
+uitstappen|выходить (из транспорта)
+overstappen|пересаживаться
+
+# === LOOKING/SEEING ===
+opzoeken|искать (информацию)
+nakijken|проверять
+uitzien|выглядеть
+aankijken|смотреть на
+rondkijken|осматриваться
+
+# === COMMUNICATION ===
+opbellen|звонить
+terugbellen|перезванивать
+afspreken|договариваться
+uitnodigen|приглашать
+voorstellen|представлять
+uitleggen|объяснять
+afsluiten|завершать, закрывать
+
+# === WORK/TASKS ===
+beginnen met|начинать с
+ophouden met|прекращать
+doorgaan met|продолжать
+afmaken|заканчивать
+invullen|заполнять
+opschrijven|записывать
+inleveren|сдавать
+meenemen|брать с собой
+terugbrengen|возвращать
+
+# === EXAMPLES IN SENTENCES ===
+# opstaan: Ik sta om 7 uur op = Я встаю в 7 часов
+# aandoen: Doe je jas aan = Надень куртку
+# uitgaan: Gaan we vanavond uit? = Пойдём сегодня гулять?
+# opbellen: Ik bel je morgen op = Я позвоню тебе завтра
+# invullen: Vul dit formulier in = Заполни эту форму
+

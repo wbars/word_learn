@@ -1,0 +1,71 @@
+# Batch 003: Numbers, Time & Dates
+# Format: Dutch|Russian
+
+# === NUMBERS 1-20 ===
+een|один
+twee|два
+drie|три
+vier|четыре
+vijf|пять
+zes|шесть
+zeven|семь
+acht|восемь
+negen|девять
+tien|десять
+elf|одиннадцать
+twaalf|двенадцать
+dertien|тринадцать
+veertien|четырнадцать
+vijftien|пятнадцать
+zestien|шестнадцать
+zeventien|семнадцать
+achttien|восемнадцать
+negentien|девятнадцать
+twintig|двадцать
+
+# === TENS ===
+dertig|тридцать
+veertig|сорок
+vijftig|пятьдесят
+zestig|шестьдесят
+zeventig|семьдесят
+tachtig|восемьдесят
+negentig|девяносто
+honderd|сто
+duizend|тысяча
+
+# === DAYS OF WEEK (de-words) ===
+de maandag|понедельник
+de dinsdag|вторник
+de woensdag|среда
+de donderdag|четверг
+de vrijdag|пятница
+de zaterdag|суббота
+de zondag|воскресенье
+
+# === MONTHS (de-words) ===
+januari|январь
+februari|февраль
+maart|март
+april|апрель
+mei|май
+juni|июнь
+juli|июль
+augustus|август
+september|сентябрь
+oktober|октябрь
+november|ноябрь
+december|декабрь
+
+# === TIME EXPRESSIONS ===
+vandaag|сегодня
+gisteren|вчера
+morgen|завтра
+overmorgen|послезавтра
+eergisteren|позавчера
+nu|сейчас
+straks|позже, скоро
+later|позже
+vroeg|рано
+laat|поздно
+op tijd|вовремя

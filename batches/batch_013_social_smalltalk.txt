@@ -1,0 +1,84 @@
+# Batch 013: Social Phrases & Small Talk
+# Format: Dutch|Russian
+
+# === GREETINGS ===
+Hallo|Привет
+Hoi|Привет (неформ.)
+Goedemorgen|Доброе утро
+Goedemiddag|Добрый день
+Goedenavond|Добрый вечер
+Goedenacht|Спокойной ночи
+Dag|Пока / Привет
+Doei|Пока (неформ.)
+Tot ziens|До свидания
+Tot later|До скорого
+Tot morgen|До завтра
+
+# === HOW ARE YOU ===
+Hoe gaat het?|Как дела?
+Hoe is het?|Как оно?
+Alles goed?|Всё хорошо?
+Goed, dank je|Хорошо, спасибо
+Prima|Отлично
+Het gaat wel|Нормально
+Niet zo goed|Не очень
+En met jou?|А у тебя?
+
+# === INTRODUCTIONS ===
+Ik ben...|Я...
+Mijn naam is...|Меня зовут...
+Aangenaam|Приятно познакомиться
+Leuk je te ontmoeten|Рад тебя видеть
+Waar kom je vandaan?|Откуда ты?
+Ik kom uit...|Я из...
+Hoe lang woon je hier?|Как долго ты здесь живёшь?
+
+# === POLITE PHRASES ===
+Alsjeblieft|Пожалуйста (неформ.)
+Alstublieft|Пожалуйста (формал.)
+Dank je wel|Спасибо (неформ.)
+Dank u wel|Спасибо (формал.)
+Graag gedaan|Пожалуйста (в ответ)
+Sorry|Извини
+Pardon|Простите
+Geen probleem|Не проблема
+Geeft niet|Ничего страшного
+
+# === ASKING ===
+Mag ik...?|Можно мне...?
+Kun je...?|Можешь ты...?
+Zou je...?|Не мог бы ты...?
+Weet je...?|Знаешь ли ты...?
+Heb je...?|Есть ли у тебя...?
+
+# === AGREEMENT/DISAGREEMENT ===
+Ja|Да
+Nee|Нет
+Misschien|Может быть
+Ik denk het wel|Думаю, да
+Ik denk het niet|Думаю, нет
+Ik weet het niet|Не знаю
+Dat klopt|Это верно
+Dat is waar|Это правда
+Eens|Согласен
+Niet eens|Не согласен
+
+# === REACTIONS ===
+Echt waar?|Правда?
+Wat leuk!|Как здорово!
+Wat jammer|Как жаль
+Gefeliciteerd!|Поздравляю!
+Succes!|Удачи!
+Beterschap!|Выздоравливай!
+Veel plezier!|Приятного времени!
+Welterusten|Спокойной ночи
+Eet smakelijk|Приятного аппетита
+Proost!|За здоровье!
+
+# === SMALL TALK ===
+Mooi weer, hè?|Хорошая погода, да?
+Wat doe je voor werk?|Кем ты работаешь?
+Heb je plannen?|Есть планы?
+Wat heb je gedaan?|Что ты делал?
+Leuk weekend gehad?|Хорошо провёл выходные?
+

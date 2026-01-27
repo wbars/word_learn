@@ -1,0 +1,80 @@
+# Batch 020: Dutch Expressions & Idioms
+# Format: Dutch|Russian
+
+# === COMMON EXPRESSIONS ===
+Dat is lekker|Это вкусно / приятно
+Gezellig!|Уютно! Приятно! (важное голл. понятие)
+Geen idee|Понятия не имею
+Geen probleem|Не проблема
+Dat kan|Это можно
+Dat kan niet|Это невозможно
+Zeker weten|Точно
+Absoluut|Абсолютно
+Natuurlijk|Конечно
+Inderdaad|Действительно
+Eigenlijk|На самом деле
+Trouwens|Кстати
+Tenminste|По крайней мере
+
+# === USEFUL FILLERS ===
+Nou|Ну
+Tja|Ну да (нейтрально)
+Zeg|Слушай
+Hè|Да? / Правда?
+Zo|Так, вот так
+Weet je|Знаешь
+Ik bedoel|Я имею в виду
+Laten we zeggen|Скажем так
+
+# === AGREEMENT ===
+Ja hoor|Да, конечно
+Nee hoor|Да нет
+Oké dan|Ну ладно
+Prima|Отлично
+Goed zo|Хорошо, молодец
+Top!|Супер!
+Mooi zo|Хорошо, отлично
+Akkoord|Договорились
+
+# === DUTCH IDIOMS ===
+Nu komt de aap uit de mouw|Вот в чём дело (букв: обезьяна из рукава)
+Dat is andere koek|Это другое дело
+Met de deur in huis vallen|Говорить прямо в лоб
+Op de hoogte zijn|Быть в курсе
+Dat zit wel snor|Всё в порядке
+Een appeltje schillen|Иметь претензии (к кому-то)
+Het loopt in de soep|Всё пошло не так
+Iets onder de knie krijgen|Освоить что-то
+De koe bij de horens vatten|Взять быка за рога
+Ergens een punt achter zetten|Поставить точку
+
+# === POLITE PHRASES ===
+Mag ik even?|Можно на минутку?
+Zou u misschien...|Не могли бы вы...
+Het spijt me|Мне жаль
+Wat vervelend|Как неприятно
+Wat naar|Как жаль
+Sterkte ermee|Держись
+Succes ermee|Удачи с этим
+Het beste|Всего хорошего
+
+# === REACTIONS ===
+Echt waar?|Правда?
+Meen je dat?|Ты серьёзно?
+Wat zeg je?|Что ты говоришь?
+Hoezo?|Почему? В смысле?
+Waarom niet?|Почему нет?
+Laat maar|Забудь, не важно
+Maakt niet uit|Не важно
+Het geeft niet|Ничего страшного
+
+# === TIME EXPRESSIONS ===
+Zo meteen|Сейчас, сразу
+Straks|Позже
+Net|Только что
+Opeens|Вдруг
+Eindelijk|Наконец
+Voorlopig|Пока что
+Binnenkort|Скоро
+Ondertussen|Тем временем
+

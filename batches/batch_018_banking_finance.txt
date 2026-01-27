@@ -1,0 +1,83 @@
+# Batch 018: Banking & Finance
+# Format: Dutch|Russian
+
+# === BANK ===
+de bank|банк
+het bankkantoor|отделение банка
+de geldautomaat|банкомат
+de pinautomaat|банкомат (для карт)
+de bankier|банкир
+
+# === ACCOUNTS ===
+de rekening|счёт
+de bankrekening|банковский счёт
+de betaalrekening|текущий счёт
+de spaarrekening|сберегательный счёт
+het rekeningnummer|номер счёта
+het IBAN|ИБАН
+het saldo|баланс
+de rente|процент
+
+# === CARDS ===
+de pinpas|дебетовая карта
+de betaalpas|платёжная карта
+de creditcard|кредитная карта
+de pincode|пин-код
+contactloos|бесконтактный
+
+# === MONEY ===
+het geld|деньги
+de euro|евро
+de cent|цент
+het biljet|банкнота
+de munt|монета
+het wisselgeld|сдача
+contant geld|наличные
+
+# === TRANSACTIONS ===
+de betaling|платёж
+de overboeking|перевод
+de transactie|транзакция
+het bedrag|сумма
+de ontvanger|получатель
+de afschrijving|списание
+de storting|внесение денег
+de opname|снятие денег
+
+# === BANKING VERBS ===
+betalen|платить
+pinnen|платить картой
+overmaken|переводить (деньги)
+storten|вносить (деньги)
+opnemen|снимать (деньги)
+sparen|копить
+lenen|занимать
+uitgeven|тратить
+verdienen|зарабатывать
+
+# === BILLS & PAYMENTS ===
+de rekening|счёт (к оплате)
+de factuur|счёт-фактура
+de huur|аренда
+de hypotheek|ипотека
+de lening|кредит, займ
+de schuld|долг
+de verzekering|страховка
+de premie|премия, взнос
+
+# === FINANCIAL TERMS ===
+het inkomen|доход
+de uitgaven|расходы
+het budget|бюджет
+de korting|скидка
+duur|дорого
+goedkoop|дёшево
+gratis|бесплатно
+
+# === BANKING PHRASES ===
+Ik wil een rekening openen|Я хочу открыть счёт
+Kan ik geld overmaken?|Могу я перевести деньги?
+Wat is mijn saldo?|Какой у меня баланс?
+De pinautomaat werkt niet|Банкомат не работает
+Mijn pas is geblokkeerd|Моя карта заблокирована
+

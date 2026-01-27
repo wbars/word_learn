@@ -1,0 +1,76 @@
+# Batch 008: Home & Household
+# Format: Dutch|Russian
+
+# === ROOMS ===
+de kamer|комната
+de woonkamer|гостиная
+de slaapkamer|спальня
+de keuken|кухня
+de badkamer|ванная комната
+het toilet|туалет
+de gang|коридор, прихожая
+de zolder|чердак
+de kelder|подвал
+het balkon|балкон
+de tuin|сад
+
+# === FURNITURE ===
+de bank|диван
+de stoel|стул
+de tafel|стол
+het bed|кровать
+de kast|шкаф
+de boekenkast|книжный шкаф
+het bureau|письменный стол
+de lamp|лампа
+het tapijt|ковёр
+de spiegel|зеркало
+de gordijnen|шторы
+
+# === KITCHEN ITEMS ===
+de koelkast|холодильник
+het fornuis|плита
+de oven|духовка
+de magnetron|микроволновка
+de vaatwasser|посудомоечная машина
+de waterkoker|чайник (электрический)
+het aanrecht|кухонная столешница
+de gootsteen|раковина (кухонная)
+
+# === KITCHEN UTENSILS ===
+het bord|тарелка
+de kom|миска
+het glas|стакан
+de mok|кружка
+de kop|чашка
+het mes|нож
+de vork|вилка
+de lepel|ложка
+de pan|сковорода
+de pot|кастрюля
+
+# === BATHROOM ===
+de douche|душ
+het bad|ванна
+de wastafel|раковина (умывальник)
+de handdoek|полотенце
+de zeep|мыло
+de shampoo|шампунь
+de tandenborstel|зубная щётка
+de tandpasta|зубная паста
+
+# === HOUSEHOLD APPLIANCES ===
+de wasmachine|стиральная машина
+de droger|сушильная машина
+de stofzuiger|пылесос
+de strijkplank|гладильная доска
+het strijkijzer|утюг
+
+# === HOUSEHOLD VERBS ===
+opruimen|убирать, приводить в порядок
+afwassen|мыть посуду
+strijken|гладить
+de vuilnis buiten zetten|выносить мусор
+de was doen|стирать
+stoffen|вытирать пыль
+

@@ -1,0 +1,82 @@
+# Batch 016: Phone & Communication
+# Format: Dutch|Russian
+
+# === DEVICES ===
+de telefoon|телефон
+de mobiel|мобильный телефон
+de smartphone|смартфон
+de tablet|планшет
+de computer|компьютер
+de laptop|ноутбук
+
+# === PHONE PARTS ===
+het scherm|экран
+de lader|зарядка
+de batterij|батарея
+de simkaart|сим-карта
+de oortjes|наушники
+de koptelefoon|наушники (большие)
+
+# === PHONE ACTIONS ===
+bellen|звонить
+opnemen|отвечать (на звонок)
+ophangen|класть трубку
+terugbellen|перезванивать
+een bericht sturen|отправить сообщение
+appen|писать в WhatsApp
+intoetsen|набирать номер
+opladen|заряжать
+
+# === CALL TYPES ===
+het telefoontje|звонок
+het gesprek|разговор
+de voicemail|голосовая почта
+het gemist gesprek|пропущенный звонок
+de oproep|вызов
+
+# === INTERNET ===
+het internet|интернет
+de wifi|вай-фай
+het wachtwoord|пароль
+de verbinding|соединение
+de app|приложение
+de website|сайт
+downloaden|скачивать
+uploaden|загружать
+zoeken|искать
+inloggen|входить в аккаунт
+uitloggen|выходить из аккаунта
+
+# === SOCIAL MEDIA ===
+het account|аккаунт
+het profiel|профиль
+de foto|фото
+de video|видео
+het bericht|сообщение
+de post|пост
+liken|лайкать
+delen|делиться
+volgen|подписываться
+ontvolgen|отписываться
+
+# === EMAIL ===
+de e-mail|электронная почта
+de inbox|входящие
+het bijlage|вложение
+de ontvanger|получатель
+de afzender|отправитель
+versturen|отправлять
+ontvangen|получать
+beantwoorden|отвечать
+doorsturen|пересылать
+
+# === PHONE PHRASES ===
+Met wie spreek ik?|С кем я говорю?
+Kan ik... spreken?|Могу я поговорить с...?
+Een moment, alstublieft|Одну минуту, пожалуйста
+Hij/Zij is er niet|Его/Её нет
+Kan hij/zij terugbellen?|Может он/она перезвонить?
+Ik bel later terug|Я перезвоню позже
+De verbinding is slecht|Плохая связь
+Ik hoor je niet goed|Я тебя плохо слышу
+

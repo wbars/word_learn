@@ -1,0 +1,82 @@
+# Batch 014: Emotions & Feelings
+# Format: Dutch|Russian
+
+# === POSITIVE EMOTIONS ===
+blij|радостный
+gelukkig|счастливый
+tevreden|довольный
+opgewonden|взволнованный, возбуждённый
+enthousiast|восторженный
+trots|гордый
+dankbaar|благодарный
+verliefd|влюблённый
+opgelucht|облегчённый
+hoopvol|надеющийся
+
+# === NEGATIVE EMOTIONS ===
+verdrietig|грустный
+boos|злой
+geïrriteerd|раздражённый
+gefrustreerd|разочарованный
+bang|испуганный
+nerveus|нервный
+bezorgd|обеспокоенный
+jaloers|ревнивый, завистливый
+eenzaam|одинокий
+teleurgesteld|разочарованный
+
+# === NEUTRAL/OTHER ===
+moe|усталый
+uitgeput|измождённый
+ontspannen|расслабленный
+rustig|спокойный
+gestrest|в стрессе
+verward|смущённый, растерянный
+verrast|удивлённый
+geschokt|шокированный
+nieuwsgierig|любопытный
+verveeld|скучающий
+
+# === EMOTION NOUNS ===
+het gevoel|чувство
+de emotie|эмоция
+de blijdschap|радость
+het geluk|счастье
+de angst|страх
+de woede|гнев
+het verdriet|горе, печаль
+de liefde|любовь
+de haat|ненависть
+de stress|стресс
+de zorgen|заботы, переживания
+
+# === EXPRESSING FEELINGS ===
+Ik voel me...|Я чувствую себя...
+Ik ben...|Я...
+Ik heb zin in...|Мне хочется...
+Ik heb geen zin|Мне не хочется
+Ik ben in de war|Я в замешательстве
+Ik maak me zorgen|Я беспокоюсь
+Ik ben het zat|Мне надоело
+Ik heb er genoeg van|С меня хватит
+
+# === EMOTION VERBS ===
+voelen|чувствовать
+huilen|плакать
+lachen|смеяться
+glimlachen|улыбаться
+schreeuwen|кричать
+zich schamen|стыдиться
+zich ergeren|раздражаться
+genieten|наслаждаться
+haten|ненавидеть
+houden van|любить
+
+# === COMFORT PHRASES ===
+Het komt goed|Всё будет хорошо
+Maak je geen zorgen|Не беспокойся
+Rustig maar|Спокойно
+Ik begrijp het|Я понимаю
+Sterkte|Держись
+Ik ben er voor je|Я рядом
+

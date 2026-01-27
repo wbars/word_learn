@@ -1,0 +1,88 @@
+# Batch 015: Work & Office
+# Format: Dutch|Russian
+
+# === WORKPLACE ===
+het kantoor|офис
+de werkplek|рабочее место
+het bedrijf|компания, предприятие
+de organisatie|организация
+de afdeling|отдел
+de vergaderzaal|переговорная
+de receptie|ресепшн
+het magazijn|склад
+de fabriek|завод, фабрика
+
+# === PEOPLE ===
+de collega|коллега
+de baas|начальник
+de manager|менеджер
+de directeur|директор
+de medewerker|сотрудник
+de werknemer|работник
+de werkgever|работодатель
+het team|команда
+de klant|клиент
+de leverancier|поставщик
+
+# === JOB TYPES ===
+de baan|работа, должность
+het werk|работа
+de functie|должность
+voltijds|полная занятость
+deeltijds|частичная занятость
+het contract|контракт
+vast contract|постоянный контракт
+tijdelijk contract|временный контракт
+de stage|стажировка
+de stagiair|стажёр
+
+# === WORK ACTIVITIES ===
+de vergadering|совещание
+de presentatie|презентация
+het project|проект
+de deadline|дедлайн
+de taak|задача
+het rapport|отчёт
+de e-mail|электронная почта
+het telefoontje|телефонный звонок
+
+# === OFFICE EQUIPMENT ===
+de computer|компьютер
+de laptop|ноутбук
+het scherm|экран
+het toetsenbord|клавиатура
+de muis|мышь
+de printer|принтер
+de scanner|сканер
+de telefoon|телефон
+
+# === WORK VERBS ===
+werken|работать
+vergaderen|совещаться
+plannen|планировать
+organiseren|организовывать
+samenwerken|сотрудничать
+communiceren|общаться
+rapporteren|отчитываться
+bellen|звонить
+mailen|писать по почте
+printen|печатать
+
+# === EMPLOYMENT ===
+solliciteren|подавать заявку на работу
+de sollicitatie|заявка на работу
+het sollicitatiegesprek|собеседование
+het cv|резюме
+de motivatiebrief|мотивационное письмо
+aannemen|принимать на работу
+ontslaan|увольнять
+ontslag nemen|увольняться
+met pensioen gaan|выходить на пенсию
+
+# === SALARY ===
+het salaris|зарплата
+het loon|оплата труда
+de vakantiedagen|отпускные дни
+de bonus|премия
+de vergoeding|компенсация
+

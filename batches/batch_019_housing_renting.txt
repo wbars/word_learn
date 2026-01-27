@@ -1,0 +1,88 @@
+# Batch 019: Housing & Renting
+# Format: Dutch|Russian
+
+# === HOUSING TYPES ===
+het huis|дом
+de woning|жильё
+het appartement|квартира
+de flat|квартира (в высотке)
+de studio|студия
+de kamer|комната
+het studentenhuis|студенческий дом
+de eengezinswoning|частный дом
+de rijtjeswoning|дом в ряду (таунхаус)
+de vrijstaande woning|отдельно стоящий дом
+
+# === RENTING ===
+huren|снимать (жильё)
+de huur|аренда
+de huurder|арендатор
+de verhuurder|арендодатель
+de huurprijs|арендная плата
+de borg|залог
+het huurcontract|договор аренды
+de makelaar|риэлтор
+
+# === BUYING ===
+kopen|покупать
+verkopen|продавать
+de koper|покупатель
+de verkoper|продавец
+de koopprijs|цена покупки
+de hypotheek|ипотека
+de notaris|нотариус
+het eigendom|собственность
+
+# === UTILITIES ===
+de servicekosten|коммунальные расходы
+het gas|газ
+de elektriciteit|электричество
+het water|вода
+de verwarming|отопление
+het internet|интернет
+de meter|счётчик
+de rekening|счёт
+
+# === HOUSING FEATURES ===
+de verdieping|этаж
+de begane grond|первый этаж
+gemeubileerd|меблированный
+ongemeubileerd|без мебели
+gerenoveerd|отремонтированный
+de oppervlakte|площадь
+vierkante meter|квадратный метр
+de indeling|планировка
+
+# === MOVING ===
+verhuizen|переезжать
+de verhuizing|переезд
+inpakken|упаковывать
+uitpakken|распаковывать
+de verhuisdoos|коробка для переезда
+de sleutel|ключ
+de overdracht|передача (ключей)
+
+# === MAINTENANCE ===
+onderhoud|обслуживание
+de reparatie|ремонт
+de lekkage|протечка
+kapot|сломанный
+repareren|ремонтировать
+de monteur|мастер
+de huismeester|управдом
+
+# === HOUSING SEARCH ===
+zoeken|искать
+de bezichtiging|просмотр (жилья)
+beschikbaar|доступный
+per direct|немедленно
+op zoek naar|в поиске
+de wachtlijst|лист ожидания
+
+# === HOUSING PHRASES ===
+Ik zoek een woning|Я ищу жильё
+Wat zijn de servicekosten?|Какие коммунальные расходы?
+Wanneer is het beschikbaar?|Когда доступно?
+Mag ik huisdieren hebben?|Можно с домашними животными?
+Is het gemeubileerd?|Это меблировано?
+

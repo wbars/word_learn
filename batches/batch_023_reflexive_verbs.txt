@@ -1,0 +1,68 @@
+# Batch 023: Reflexive Verbs
+# Format: Dutch|Russian
+# Note: These verbs use "zich" (myself/yourself/etc.): "Ik was me" = I wash myself
+
+# === DAILY CARE ===
+zich wassen|мыться
+zich douchen|принимать душ
+zich scheren|бриться
+zich aankleden|одеваться
+zich uitkleden|раздеваться
+zich opmaken|краситься
+zich kammen|расчёсываться
+
+# === FEELINGS/STATES ===
+zich voelen|чувствовать себя
+zich schamen|стыдиться
+zich ergeren|раздражаться
+zich vervelen|скучать
+zich verbazen|удивляться
+zich zorgen maken|беспокоиться
+zich afvragen|задаваться вопросом
+
+# === MOVEMENT/POSITION ===
+zich bewegen|двигаться
+zich omdraaien|оборачиваться
+zich bukken|наклоняться
+zich uitrekken|потягиваться
+zich verstoppen|прятаться
+zich haasten|спешить
+
+# === SOCIAL ===
+zich voorstellen|представляться
+zich gedragen|вести себя
+zich verontschuldigen|извиняться
+zich aanmelden|регистрироваться
+zich afmelden|отмечаться (уход)
+zich verzetten|сопротивляться
+
+# === MENTAL ===
+zich concentreren|концентрироваться
+zich herinneren|вспоминать
+zich realiseren|осознавать
+zich voorbereiden|готовиться
+zich ontwikkelen|развиваться
+zich aanpassen|приспосабливаться
+
+# === HEALTH ===
+zich bezeren|ушибиться
+zich snijden|порезаться
+zich branden|обжечься
+zich ontspannen|расслабляться
+zich uitrusten|отдыхать
+
+# === OTHER COMMON ===
+zich vergissen|ошибаться
+zich bemoeien met|вмешиваться в
+zich interesseren voor|интересоваться
+zich inschrijven|записываться
+zich uitschrijven|выписываться
+zich abonneren|подписываться
+
+# === EXAMPLES IN SENTENCES ===
+# zich voelen: Ik voel me goed = Я чувствую себя хорошо
+# zich schamen: Hij schaamt zich = Он стыдится
+# zich voorstellen: Mag ik me voorstellen? = Могу я представиться?
+# zich vergissen: Je vergist je = Ты ошибаешься
+# zich haasten: Haast je! = Поторопись!
+

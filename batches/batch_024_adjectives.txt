@@ -1,0 +1,104 @@
+# Batch 024: Adjectives & Descriptions
+# Format: Dutch|Russian
+
+# === SIZE ===
+groot|большой
+klein|маленький
+lang|длинный, высокий
+kort|короткий, низкий
+breed|широкий
+smal|узкий
+dik|толстый
+dun|тонкий
+hoog|высокий
+laag|низкий
+
+# === QUALITY ===
+goed|хороший
+slecht|плохой
+mooi|красивый
+lelijk|некрасивый
+nieuw|новый
+oud|старый
+schoon|чистый
+vies|грязный
+sterk|сильный
+zwak|слабый
+
+# === TEMPERATURE/TEXTURE ===
+warm|тёплый
+koud|холодный
+heet|горячий
+hard|твёрдый, жёсткий
+zacht|мягкий
+nat|мокрый
+droog|сухой
+glad|гладкий, скользкий
+ruw|шероховатый
+
+# === TASTE/SMELL ===
+lekker|вкусный
+zoet|сладкий
+zout|солёный
+zuur|кислый
+bitter|горький
+scherp|острый
+fris|свежий
+
+# === SPEED/TIME ===
+snel|быстрый
+langzaam|медленный
+vroeg|ранний
+laat|поздний
+jong|молодой
+oud|старый
+
+# === PERSONALITY ===
+aardig|милый, приятный
+lief|милый, добрый
+vriendelijk|дружелюбный
+grappig|смешной
+slim|умный
+dom|глупый
+lui|ленивый
+ijverig|трудолюбивый
+eerlijk|честный
+betrouwbaar|надёжный
+
+# === EMOTIONS (as adjectives) ===
+blij|радостный
+verdrietig|грустный
+boos|злой
+bang|испуганный
+rustig|спокойный
+druk|занятой, шумный
+stil|тихий
+
+# === COLORS ===
+wit|белый
+zwart|чёрный
+rood|красный
+blauw|синий
+groen|зелёный
+geel|жёлтый
+oranje|оранжевый
+paars|фиолетовый
+roze|розовый
+bruin|коричневый
+grijs|серый
+
+# === OTHER USEFUL ===
+makkelijk|лёгкий
+moeilijk|трудный
+belangrijk|важный
+interessant|интересный
+saai|скучный
+duur|дорогой
+goedkoop|дешёвый
+vol|полный
+leeg|пустой
+open|открытый
+dicht|закрытый
+dezelfde|такой же
+anders|другой
+

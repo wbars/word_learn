@@ -1,0 +1,76 @@
+# Batch 017: Government & Gemeente
+# Format: Dutch|Russian
+
+# === GOVERNMENT BODIES ===
+de gemeente|муниципалитет
+het gemeentehuis|мэрия
+het stadhuis|ратуша
+de overheid|правительство
+de regering|правительство (кабинет)
+het ministerie|министерство
+de politie|полиция
+de belastingdienst|налоговая служба
+
+# === DOCUMENTS ===
+het paspoort|паспорт
+de identiteitskaart|удостоверение личности
+het rijbewijs|водительские права
+de verblijfsvergunning|вид на жительство
+het visum|виза
+de werkvergunning|разрешение на работу
+het uittreksel|выписка
+de vergunning|разрешение
+het formulier|форма, бланк
+
+# === REGISTRATION ===
+de inschrijving|регистрация
+zich inschrijven|регистрироваться
+de adreswijziging|смена адреса
+verhuizen|переезжать
+het bevolkingsregister|регистр населения
+de burgerlijke stand|ЗАГС
+het BSN|личный номер (соц. страхование)
+
+# === CIVIL STATUS ===
+de nationaliteit|национальность
+de geboorteakte|свидетельство о рождении
+het huwelijk|брак
+trouwen|жениться, выходить замуж
+scheiden|разводиться
+de echtscheiding|развод
+het partnerschap|партнёрство
+
+# === APPOINTMENTS ===
+de afspraak|запись, встреча
+een afspraak maken|записаться
+het loket|окошко
+de wachttijd|время ожидания
+het ticketnummer|номер талона
+
+# === TAXES & FINANCE ===
+de belasting|налог
+de aangifte|декларация
+de teruggave|возврат (налогов)
+de toeslag|пособие, надбавка
+de huurtoeslag|пособие на аренду
+de zorgtoeslag|пособие на страховку
+de kinderbijslag|детское пособие
+de AOW|пенсия по старости
+
+# === LEGAL ===
+de wet|закон
+het recht|право
+de rechter|судья
+de rechtbank|суд
+de advocaat|адвокат
+de boete|штраф
+de klacht|жалоба
+aangifte doen|подать заявление (в полицию)
+
+# === USEFUL PHRASES ===
+Ik wil een afspraak maken|Я хочу записаться
+Wat heb ik nodig?|Что мне нужно?
+Hoelang duurt het?|Сколько это займёт?
+Waar moet ik tekenen?|Где мне подписать?
+Is dit formulier correct?|Эта форма верна?
+

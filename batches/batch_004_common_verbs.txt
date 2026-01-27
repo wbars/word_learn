@@ -1,0 +1,65 @@
+# Batch 004: Common Verbs (Daily Actions)
+# Format: Dutch|Russian
+
+# === MOVEMENT ===
+lopen|ходить, идти пешком
+rennen|бежать
+rijden|ехать (на транспорте)
+fietsen|ехать на велосипеде
+vliegen|лететь
+zwemmen|плавать
+vallen|падать
+springen|прыгать
+klimmen|лезть, карабкаться
+stappen|шагать, идти
+
+# === DAILY ACTIONS ===
+opstaan|вставать
+wakker worden|просыпаться
+slapen|спать
+douchen|принимать душ
+aankleden|одеваться
+uitkleden|раздеваться
+ontbijten|завтракать
+lunchen|обедать
+eten|есть
+drinken|пить
+koken|готовить
+bakken|печь, жарить
+wassen|мыть, стирать
+schoonmaken|убирать
+stofzuigen|пылесосить
+
+# === WORK/ACTIVITY ===
+werken|работать
+studeren|учиться (в универе)
+lezen|читать
+schrijven|писать
+typen|печатать
+bellen|звонить
+mailen|писать email
+vergaderen|совещаться
+presenteren|презентовать
+
+# === SOCIAL ===
+ontmoeten|встречать
+bezoeken|посещать
+uitnodigen|приглашать
+afspreken|договариваться
+groeten|здороваться
+bedanken|благодарить
+feliciteren|поздравлять
+excuseren|извинять
+
+# === POSSESSION/EXCHANGE ===
+hebben|иметь
+krijgen|получать
+geven|давать
+nemen|брать
+brengen|приносить
+halen|забирать, приносить
+sturen|отправлять
+ontvangen|получать
+ruilen|обменивать
+lenen|одалживать
+terugbrengen|возвращать
