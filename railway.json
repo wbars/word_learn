@@ -5,7 +5,6 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "echo 'Starting' && env && echo 'Done env' && alembic upgrade head && python -m word_learn.bot",
     "healthcheckPath": null,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
