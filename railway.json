@@ -5,7 +5,7 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "echo 'Step 1' >&2; env | grep -E 'DATABASE|BOT' >&2; echo 'Step 2' >&2; alembic upgrade head; echo 'Step 3' >&2; python -m word_learn.bot",
+    "startCommand": "echo 'Starting' && env && echo 'Done env' && alembic upgrade head && python -m word_learn.bot",
     "healthcheckPath": null,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
