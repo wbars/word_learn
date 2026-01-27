@@ -6,7 +6,6 @@ build-backend = "hatchling.build"
 name = "word_learn"
 version = "1.0.0"
 description = "Telegram bot for learning words with spaced repetition"
-readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "aiogram>=3.4.1",
