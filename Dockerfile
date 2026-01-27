@@ -21,4 +21,4 @@ COPY scripts/ scripts/
 RUN pip install --no-cache-dir .
 
 # Run database migrations and start bot
-CMD ["sh", "-c", "alembic upgrade head && python -m word_learn.bot"]
+CMD ["sh", "-c", "echo 'Starting alembic...' && alembic upgrade head && echo 'Alembic done, starting bot...' && python -m word_learn.bot"]
