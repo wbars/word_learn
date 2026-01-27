@@ -38,21 +38,64 @@ def parse_mysql_dump(filepath: str) -> dict:
         'today_practice': [],
     }
 
-    # Find INSERT statements
-    insert_pattern = r"INSERT INTO `?(\w+)`?\s+(?:\([^)]+\)\s+)?VALUES\s*(.*?);"
+    # Find INSERT statements using character-by-character parsing
+    # to properly handle semicolons inside quoted strings
+    insert_start_pattern = re.compile(
+        r"INSERT INTO `?(\w+)`?\s+(?:\([^)]+\)\s+)?VALUES\s*",
+        re.IGNORECASE
+    )
 
-    for match in re.finditer(insert_pattern, content, re.DOTALL | re.IGNORECASE):
+    for match in insert_start_pattern.finditer(content):
         table_name = match.group(1)
-        values_str = match.group(2)
-
         if table_name not in data:
             continue
 
-        # Parse values - handle multiple rows in one INSERT
-        rows = parse_values(values_str, table_name)
-        data[table_name].extend(rows)
+        # Find the end of the VALUES clause by tracking quotes
+        values_start = match.end()
+        values_str = extract_values_clause(content, values_start)
+
+        if values_str:
+            # Parse values - handle multiple rows in one INSERT
+            rows = parse_values(values_str, table_name)
+            data[table_name].extend(rows)
 
     return data
+
+
+def extract_values_clause(content: str, start: int) -> str:
+    """Extract VALUES clause handling semicolons inside quoted strings."""
+    i = start
+    in_string = False
+    string_char = None
+    escape_next = False
+
+    while i < len(content):
+        c = content[i]
+
+        if escape_next:
+            escape_next = False
+            i += 1
+            continue
+
+        if c == '\\':
+            escape_next = True
+            i += 1
+            continue
+
+        if c in ("'", '"') and not in_string:
+            in_string = True
+            string_char = c
+        elif c == string_char and in_string:
+            in_string = False
+            string_char = None
+        elif c == ';' and not in_string:
+            # Found the end of the INSERT statement
+            return content[start:i]
+
+        i += 1
+
+    # No semicolon found, return whatever we have
+    return content[start:]
 
 
 def parse_values(values_str: str, table_name: str) -> list:
