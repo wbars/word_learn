@@ -9,8 +9,10 @@ from word_learn.keyboards.practice import (
     answer_keyboard,
     practice_more_keyboard,
 )
+from word_learn.models.practice_stats import SessionStats
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
+from word_learn.services.stats_formatter import format_session_stats
 
 router = Router()
 
@@ -136,12 +138,28 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
         count = await repository.count_words_to_practice(chat_id)
 
         if count == 0:
-            # All daily words done - show stats
+            # All daily words done - show enhanced stats
             stats = await repository.get_statistics(chat_id)
-            text = "Practiced all words!"
-            if stats.total > 0:
-                text += f"\n{stats.accuracy_text} of words were guessed correctly"
+            session_results = await repository.get_session_results(chat_id)
+
+            # Build SessionStats from results
+            correct_words = [r for r in session_results if r.result == "correct"]
+            incorrect_words = [r for r in session_results if r.result == "incorrect"]
+            deleted_words = [r for r in session_results if r.result == "deleted"]
+
+            session_stats = SessionStats(
+                correct_words=correct_words,
+                incorrect_words=incorrect_words,
+                deleted_words=deleted_words,
+                total_correct=stats.correct,
+                total_count=stats.total,
+            )
+
+            text = format_session_stats(session_stats)
+
+            # Clear session data
             await repository.reset_statistics(chat_id)
+            await repository.clear_session_results(chat_id)
         else:
             text = "Practiced all words!"
 

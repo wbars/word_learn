@@ -1,5 +1,11 @@
 """PracticeStats model for tracking session statistics."""
-from dataclasses import dataclass
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from word_learn.models.session_word_result import SessionWordResult
 
 
 @dataclass
@@ -30,3 +36,19 @@ class PracticeStats:
             correct=row.get("correct", 0),
             total=row.get("total", 0),
         )
+
+
+@dataclass
+class SessionStats:
+    """Enhanced statistics for a practice session with per-word results."""
+
+    correct_words: list[SessionWordResult] = field(default_factory=list)
+    incorrect_words: list[SessionWordResult] = field(default_factory=list)
+    deleted_words: list[SessionWordResult] = field(default_factory=list)
+    total_correct: int = 0
+    total_count: int = 0
+
+    @property
+    def accuracy_text(self) -> str:
+        """Get formatted accuracy text."""
+        return f"{self.total_correct}/{self.total_count}"

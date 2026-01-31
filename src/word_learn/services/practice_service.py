@@ -142,8 +142,24 @@ class PracticeService:
             today = date.today()
 
         practice_word = await self.repository.get_practice_word(chat_id, word_id)
-        new_stage = get_new_stage_correct(practice_word.stage)
+        old_stage = practice_word.stage
+        new_stage = get_new_stage_correct(old_stage)
         next_date = calculate_next_date(today, new_stage)
+
+        # Get word translations for session result
+        word_source = practice_word.get_translation(self.settings.target_lang) or "?"
+        word_target = practice_word.get_translation(self.settings.source_lang) or "?"
+
+        # Save per-word result
+        await self.repository.save_word_result(
+            chat_id=chat_id,
+            word_id=word_id,
+            result="correct",
+            old_stage=old_stage,
+            new_stage=new_stage,
+            word_source=word_source,
+            word_target=word_target,
+        )
 
         await self.repository.update_practice_word(
             chat_id,
@@ -172,8 +188,25 @@ class PracticeService:
         if today is None:
             today = date.today()
 
+        practice_word = await self.repository.get_practice_word(chat_id, word_id)
+        old_stage = practice_word.stage
         new_stage = get_new_stage_incorrect()
         next_date = calculate_next_date(today, new_stage)
+
+        # Get word translations for session result
+        word_source = practice_word.get_translation(self.settings.target_lang) or "?"
+        word_target = practice_word.get_translation(self.settings.source_lang) or "?"
+
+        # Save per-word result
+        await self.repository.save_word_result(
+            chat_id=chat_id,
+            word_id=word_id,
+            result="incorrect",
+            old_stage=old_stage,
+            new_stage=new_stage,
+            word_source=word_source,
+            word_target=word_target,
+        )
 
         await self.repository.update_practice_word(
             chat_id,
@@ -191,6 +224,24 @@ class PracticeService:
             chat_id: Telegram chat ID
             word_id: Word ID
         """
+        practice_word = await self.repository.get_practice_word(chat_id, word_id)
+        old_stage = practice_word.stage
+
+        # Get word translations for session result
+        word_source = practice_word.get_translation(self.settings.target_lang) or "?"
+        word_target = practice_word.get_translation(self.settings.source_lang) or "?"
+
+        # Save per-word result (new_stage=None for deleted)
+        await self.repository.save_word_result(
+            chat_id=chat_id,
+            word_id=word_id,
+            result="deleted",
+            old_stage=old_stage,
+            new_stage=None,
+            word_source=word_source,
+            word_target=word_target,
+        )
+
         await self.repository.mark_deleted(chat_id, word_id)
         await self.repository.remove_from_current_practice(chat_id, word_id)
 

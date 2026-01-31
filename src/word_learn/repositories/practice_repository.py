@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 
 from word_learn.config import get_settings
 from word_learn.database import Database
-from word_learn.models import PracticeWord, PracticeStats, Word, Reminder
+from word_learn.models import PracticeWord, PracticeStats, Word, Reminder, SessionWordResult
 
 
 class PracticeRepository:
@@ -586,3 +586,78 @@ class PracticeRepository:
                 query,
                 [(word_id, chat_id) for word_id in word_ids],
             )
+
+    # Session Word Results Operations
+
+    async def save_word_result(
+        self,
+        chat_id: int,
+        word_id: int,
+        result: str,
+        old_stage: int,
+        new_stage: Optional[int],
+        word_source: str,
+        word_target: str,
+    ) -> None:
+        """Save a per-word result during a practice session.
+
+        Args:
+            chat_id: Telegram chat ID
+            word_id: Word ID
+            result: 'correct', 'incorrect', or 'deleted'
+            old_stage: Stage before the action
+            new_stage: Stage after the action (None for deleted)
+            word_source: Source language text
+            word_target: Target language text
+        """
+        query = """
+            INSERT INTO session_word_results
+                (chat_id, word_id, result, old_stage, new_stage, word_source, word_target)
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            ON CONFLICT (chat_id, word_id)
+            DO UPDATE SET result = $3, old_stage = $4, new_stage = $5,
+                          word_source = $6, word_target = $7
+        """
+
+        async with Database.connection() as conn:
+            await conn.execute(
+                query,
+                chat_id,
+                word_id,
+                result,
+                old_stage,
+                new_stage,
+                word_source,
+                word_target,
+            )
+
+    async def get_session_results(self, chat_id: int) -> list[SessionWordResult]:
+        """Get all session word results for a user.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            List of SessionWordResult objects
+        """
+        query = """
+            SELECT chat_id, word_id, result, old_stage, new_stage, word_source, word_target
+            FROM session_word_results
+            WHERE chat_id = $1
+            ORDER BY word_id
+        """
+
+        async with Database.connection() as conn:
+            rows = await conn.fetch(query, chat_id)
+            return [SessionWordResult.from_row(dict(row)) for row in rows]
+
+    async def clear_session_results(self, chat_id: int) -> None:
+        """Clear all session word results for a user.
+
+        Args:
+            chat_id: Telegram chat ID
+        """
+        query = "DELETE FROM session_word_results WHERE chat_id = $1"
+
+        async with Database.connection() as conn:
+            await conn.execute(query, chat_id)
