@@ -31,7 +31,7 @@ def answer_keyboard(word_id: int) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="✅ Done",
+                    text="✅ Correct",
                     callback_data=f"finish {word_id} correct",
                 ),
                 InlineKeyboardButton(
