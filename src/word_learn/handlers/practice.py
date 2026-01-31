@@ -13,6 +13,7 @@ from word_learn.models.practice_stats import SessionStats
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
 from word_learn.services.stats_formatter import format_session_stats
+from word_learn.services.insights_generator import generate_insights
 
 router = Router()
 
@@ -155,7 +156,30 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
                 total_count=stats.total,
             )
 
-            text = format_session_stats(session_stats)
+            # Generate insights
+            # Get consecutive failures for incorrect words
+            incorrect_word_ids = [w.word_id for w in incorrect_words]
+            consecutive_failures = await repository.get_consecutive_failures(
+                chat_id, incorrect_word_ids
+            )
+
+            # Get confident words count and calculate previous count
+            confident_count = await repository.count_confident_words(chat_id)
+            # Count words that became confident in this session (old < 5, new >= 5)
+            new_confident = sum(
+                1 for w in correct_words
+                if w.old_stage < 5 and w.new_stage is not None and w.new_stage >= 5
+            )
+            previous_confident_count = confident_count - new_confident
+
+            insights = generate_insights(
+                session_stats,
+                consecutive_failures,
+                confident_count,
+                previous_confident_count,
+            )
+
+            text = format_session_stats(session_stats, insights)
 
             # Clear session data
             await repository.reset_statistics(chat_id)

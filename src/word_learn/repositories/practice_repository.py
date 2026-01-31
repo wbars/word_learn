@@ -661,3 +661,98 @@ class PracticeRepository:
 
         async with Database.connection() as conn:
             await conn.execute(query, chat_id)
+
+    # Consecutive Failures Operations
+
+    async def increment_consecutive_failures(
+        self,
+        chat_id: int,
+        word_id: int,
+    ) -> int:
+        """Increment consecutive failures counter for a word.
+
+        Args:
+            chat_id: Telegram chat ID
+            word_id: Word ID
+
+        Returns:
+            New consecutive failures count
+        """
+        query = """
+            UPDATE word_practice
+            SET consecutive_failures = consecutive_failures + 1
+            WHERE chat_id = $1 AND word_id = $2
+            RETURNING consecutive_failures
+        """
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(query, chat_id, word_id)
+            return row["consecutive_failures"] if row else 0
+
+    async def reset_consecutive_failures(
+        self,
+        chat_id: int,
+        word_id: int,
+    ) -> None:
+        """Reset consecutive failures counter to 0.
+
+        Args:
+            chat_id: Telegram chat ID
+            word_id: Word ID
+        """
+        query = """
+            UPDATE word_practice
+            SET consecutive_failures = 0
+            WHERE chat_id = $1 AND word_id = $2
+        """
+
+        async with Database.connection() as conn:
+            await conn.execute(query, chat_id, word_id)
+
+    async def get_consecutive_failures(
+        self,
+        chat_id: int,
+        word_ids: list[int],
+    ) -> dict[int, int]:
+        """Get consecutive failures for multiple words.
+
+        Args:
+            chat_id: Telegram chat ID
+            word_ids: List of word IDs
+
+        Returns:
+            Dict mapping word_id to consecutive_failures count
+        """
+        if not word_ids:
+            return {}
+
+        query = """
+            SELECT word_id, consecutive_failures
+            FROM word_practice
+            WHERE chat_id = $1 AND word_id = ANY($2)
+        """
+
+        async with Database.connection() as conn:
+            rows = await conn.fetch(query, chat_id, word_ids)
+            return {row["word_id"]: row["consecutive_failures"] for row in rows}
+
+    # Confident Words Operations
+
+    async def count_confident_words(self, chat_id: int) -> int:
+        """Count words at stage 5+ (Confident and above).
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            Count of confident words
+        """
+        query = """
+            SELECT COUNT(*) as count
+            FROM word_practice
+            WHERE chat_id = $1 AND stage >= 5 AND deleted = FALSE
+        """
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(query, chat_id)
+            return row["count"] if row else 0

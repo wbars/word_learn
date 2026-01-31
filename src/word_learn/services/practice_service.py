@@ -167,6 +167,7 @@ class PracticeService:
             stage=new_stage,
             next_date=next_date,
         )
+        await self.repository.reset_consecutive_failures(chat_id, word_id)
         await self.repository.increment_statistics(chat_id, correct=True)
         await self.repository.remove_from_current_practice(chat_id, word_id)
 
@@ -214,6 +215,7 @@ class PracticeService:
             stage=new_stage,
             next_date=next_date,
         )
+        await self.repository.increment_consecutive_failures(chat_id, word_id)
         await self.repository.increment_statistics(chat_id, correct=False)
         await self.repository.remove_from_current_practice(chat_id, word_id)
 
