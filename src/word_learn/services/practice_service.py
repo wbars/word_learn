@@ -128,7 +128,7 @@ class PracticeService:
         chat_id: int,
         word_id: int,
         today: Optional[date] = None,
-    ) -> None:
+    ) -> tuple[int, int]:
         """Mark a word as correctly answered.
 
         Increments stage and calculates next review date.
@@ -137,6 +137,9 @@ class PracticeService:
             chat_id: Telegram chat ID
             word_id: Word ID
             today: Optional date to use (defaults to current date in configured timezone)
+
+        Returns:
+            Tuple of (old_stage, new_stage)
         """
         if today is None:
             from datetime import datetime
@@ -173,12 +176,14 @@ class PracticeService:
         await self.repository.increment_statistics(chat_id, correct=True)
         await self.repository.remove_from_current_practice(chat_id, word_id)
 
+        return old_stage, new_stage
+
     async def mark_incorrect(
         self,
         chat_id: int,
         word_id: int,
         today: Optional[date] = None,
-    ) -> None:
+    ) -> tuple[int, int]:
         """Mark a word as incorrectly answered.
 
         Resets stage to 1 and sets next review to tomorrow.
@@ -187,6 +192,9 @@ class PracticeService:
             chat_id: Telegram chat ID
             word_id: Word ID
             today: Optional date to use (defaults to current date in configured timezone)
+
+        Returns:
+            Tuple of (old_stage, new_stage)
         """
         if today is None:
             from datetime import datetime
@@ -222,6 +230,8 @@ class PracticeService:
         await self.repository.increment_consecutive_failures(chat_id, word_id)
         await self.repository.increment_statistics(chat_id, correct=False)
         await self.repository.remove_from_current_practice(chat_id, word_id)
+
+        return old_stage, new_stage
 
     async def mark_deleted(self, chat_id: int, word_id: int) -> None:
         """Mark a word as deleted (soft delete).

@@ -9,11 +9,9 @@ from word_learn.keyboards.practice import (
     answer_keyboard,
     practice_more_keyboard,
 )
-from word_learn.models.practice_stats import SessionStats
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
-from word_learn.services.stats_formatter import format_session_stats
-from word_learn.services.insights_generator import generate_insights
+from word_learn.services.stage_labels import get_stage_label
 
 router = Router()
 
@@ -113,14 +111,23 @@ async def callback_finish(callback: CallbackQuery) -> None:
 
     # Handle action
     if action == "correct":
-        await service.mark_correct(chat_id, word_id)
-        await callback.message.answer("Marked as correct!")
+        old_stage, new_stage = await service.mark_correct(chat_id, word_id)
+        old_label = get_stage_label(old_stage)
+        new_label = get_stage_label(new_stage)
+        if old_stage == new_stage:
+            text = f"Correct! {new_label}"
+        else:
+            text = f"Correct! {old_label} → {new_label}"
+        await callback.message.answer(text)
     elif action == "delete":
         await service.mark_deleted(chat_id, word_id)
         await callback.message.answer("Deleted!")
     else:  # incorrect
-        await service.mark_incorrect(chat_id, word_id)
-        await callback.message.answer("Marked as incorrect")
+        old_stage, new_stage = await service.mark_incorrect(chat_id, word_id)
+        old_label = get_stage_label(old_stage)
+        new_label = get_stage_label(new_stage)
+        text = f"Incorrect! {old_label} → {new_label}"
+        await callback.message.answer(text)
 
     # Show next word
     await _show_practice_word(callback.message, chat_id)
@@ -139,49 +146,11 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
         count = await repository.count_words_to_practice(chat_id)
 
         if count == 0:
-            # All daily words done - show enhanced stats
+            # All daily words done - show simple stats
             stats = await repository.get_statistics(chat_id)
-            session_results = await repository.get_session_results(chat_id)
-
-            # Build SessionStats from results
-            correct_words = [r for r in session_results if r.result == "correct"]
-            incorrect_words = [r for r in session_results if r.result == "incorrect"]
-            deleted_words = [r for r in session_results if r.result == "deleted"]
-
-            session_stats = SessionStats(
-                correct_words=correct_words,
-                incorrect_words=incorrect_words,
-                deleted_words=deleted_words,
-                total_correct=stats.correct,
-                total_count=stats.total,
-            )
-
-            # Generate insights
-            # Get consecutive failures for incorrect words
-            incorrect_word_ids = [w.word_id for w in incorrect_words]
-            consecutive_failures = await repository.get_consecutive_failures(
-                chat_id, incorrect_word_ids
-            )
-
-            # Get confident words count and calculate previous count
-            confident_count = await repository.count_confident_words(chat_id)
-            # Count words that became confident in this session (old < 5, new >= 5)
-            new_confident = sum(
-                1 for w in correct_words
-                if w.old_stage < 5 and w.new_stage is not None and w.new_stage >= 5
-            )
-            previous_confident_count = confident_count - new_confident
-
-            insights = generate_insights(
-                session_stats,
-                consecutive_failures,
-                confident_count,
-                previous_confident_count,
-            )
-
-            text = format_session_stats(session_stats, insights)
-
-            # Clear session data
+            text = "Practiced all words!"
+            if stats.total > 0:
+                text += f"\n{stats.accuracy_text} of words were guessed correctly"
             await repository.reset_statistics(chat_id)
             await repository.clear_session_results(chat_id)
         else:
