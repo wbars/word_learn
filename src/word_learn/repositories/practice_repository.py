@@ -168,15 +168,17 @@ class PracticeRepository:
         Returns:
             List of word_practice IDs in today's pool
         """
+        today = datetime.now(ZoneInfo(get_settings().tz)).date()
+
         query = """
             SELECT tp.word_practice_id
             FROM today_practice tp
             JOIN word_practice wp ON wp.id = tp.word_practice_id
-            WHERE tp.date = CURRENT_DATE AND wp.chat_id = $1
+            WHERE tp.date = $1 AND wp.chat_id = $2
         """
 
         async with Database.connection() as conn:
-            rows = await conn.fetch(query, chat_id)
+            rows = await conn.fetch(query, today, chat_id)
             return [row["word_practice_id"] for row in rows]
 
     async def create_today_practice(
@@ -194,6 +196,7 @@ class PracticeRepository:
             List of word_practice IDs added to today's pool
         """
         now = datetime.now(ZoneInfo(get_settings().tz))
+        today = now.date()
 
         # First, get eligible practice words
         select_query = """
@@ -207,7 +210,7 @@ class PracticeRepository:
 
         insert_query = """
             INSERT INTO today_practice (word_practice_id, date)
-            VALUES ($1, CURRENT_DATE)
+            VALUES ($1, $2)
             ON CONFLICT DO NOTHING
         """
 
@@ -218,7 +221,7 @@ class PracticeRepository:
             if practice_ids:
                 await conn.executemany(
                     insert_query,
-                    [(pid,) for pid in practice_ids],
+                    [(pid, today) for pid in practice_ids],
                 )
 
             return practice_ids
@@ -240,13 +243,14 @@ class PracticeRepository:
             List of PracticeWord objects
         """
         now = datetime.now(ZoneInfo(get_settings().tz))
+        today = now.date()
 
         query = """
             SELECT wp.id, wp.word_id, wp.chat_id, wp.next_date, wp.stage, wp.deleted,
                    w.id as w_id, w.en, w.nl, w.ru
             FROM word_practice wp
             JOIN words w ON w.id = wp.word_id
-            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = CURRENT_DATE
+            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $4
             WHERE wp.chat_id = $1
               AND wp.next_date <= $2
               AND wp.deleted = FALSE
@@ -258,7 +262,7 @@ class PracticeRepository:
         """
 
         async with Database.connection() as conn:
-            rows = await conn.fetch(query, chat_id, now, limit)
+            rows = await conn.fetch(query, chat_id, now, limit, today)
             result = []
             for row in rows:
                 row_dict = dict(row)
@@ -281,18 +285,19 @@ class PracticeRepository:
             Count of due words
         """
         now = datetime.now(ZoneInfo(get_settings().tz))
+        today = now.date()
 
         query = """
             SELECT COUNT(*) as count
             FROM word_practice wp
-            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = CURRENT_DATE
+            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $3
             WHERE wp.chat_id = $1
               AND wp.next_date <= $2
               AND wp.deleted = FALSE
         """
 
         async with Database.connection() as conn:
-            row = await conn.fetchrow(query, chat_id, now)
+            row = await conn.fetchrow(query, chat_id, now, today)
             return row["count"] if row else 0
 
     async def start_practice(

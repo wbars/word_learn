@@ -136,10 +136,12 @@ class PracticeService:
         Args:
             chat_id: Telegram chat ID
             word_id: Word ID
-            today: Optional date to use (defaults to current date)
+            today: Optional date to use (defaults to current date in configured timezone)
         """
         if today is None:
-            today = date.today()
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
+            today = datetime.now(ZoneInfo(self.settings.tz)).date()
 
         practice_word = await self.repository.get_practice_word(chat_id, word_id)
         old_stage = practice_word.stage
@@ -184,10 +186,12 @@ class PracticeService:
         Args:
             chat_id: Telegram chat ID
             word_id: Word ID
-            today: Optional date to use (defaults to current date)
+            today: Optional date to use (defaults to current date in configured timezone)
         """
         if today is None:
-            today = date.today()
+            from datetime import datetime
+            from zoneinfo import ZoneInfo
+            today = datetime.now(ZoneInfo(self.settings.tz)).date()
 
         practice_word = await self.repository.get_practice_word(chat_id, word_id)
         old_stage = practice_word.stage
