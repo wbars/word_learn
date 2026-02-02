@@ -1,4 +1,6 @@
 """Handlers for practice flow."""
+from datetime import datetime
+
 from aiogram import Router, F
 from aiogram.filters import Command
 from aiogram.types import Message, CallbackQuery
@@ -12,6 +14,7 @@ from word_learn.keyboards.practice import (
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
 from word_learn.services.stage_labels import get_stage_label
+from word_learn.services.streaks import format_streak_line
 
 router = Router()
 
@@ -144,6 +147,10 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
     if practice_word is None:
         # Session complete
         count = await repository.count_words_to_practice(chat_id)
+        settings = get_settings()
+        today = datetime.now(settings.timezone).date()
+        streak_days = await repository.update_streak(chat_id, today)
+        streak_line = format_streak_line(streak_days)
 
         if count == 0:
             # All daily words done - show simple stats
@@ -151,10 +158,12 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
             text = "Practiced all words!"
             if stats.total > 0:
                 text += f"\n{stats.accuracy_text} of words were guessed correctly"
+            text += f"\n{streak_line}"
             await repository.reset_statistics(chat_id)
             await repository.clear_session_results(chat_id)
         else:
             text = "Practiced all words!"
+            text += f"\n{streak_line}"
 
         await message.answer(
             text,

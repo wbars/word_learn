@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from word_learn.config import get_settings
 from word_learn.database import Database
 from word_learn.models import PracticeWord, PracticeStats, Word, Reminder, SessionWordResult
+from word_learn.services.streaks import compute_streak_update
 
 
 class PracticeRepository:
@@ -666,6 +667,47 @@ class PracticeRepository:
 
         async with Database.connection() as conn:
             await conn.execute(query, chat_id)
+
+    # Streak Operations
+
+    async def update_streak(self, chat_id: int, today: date) -> int:
+        """Update and return the user's current streak.
+
+        Args:
+            chat_id: Telegram chat ID
+            today: Date of activity in configured timezone
+
+        Returns:
+            Updated streak length in days
+        """
+        select_query = """
+            SELECT current_streak, last_active_date
+            FROM practice_streaks
+            WHERE chat_id = $1
+        """
+        upsert_query = """
+            INSERT INTO practice_streaks (chat_id, current_streak, last_active_date)
+            VALUES ($1, $2, $3)
+            ON CONFLICT (chat_id)
+            DO UPDATE SET current_streak = $2, last_active_date = $3
+        """
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(select_query, chat_id)
+            current_streak = row["current_streak"] if row else 0
+            last_active = row["last_active_date"] if row else None
+            new_streak, new_last_active = compute_streak_update(
+                last_active,
+                current_streak,
+                today,
+            )
+            await conn.execute(
+                upsert_query,
+                chat_id,
+                new_streak,
+                new_last_active,
+            )
+            return new_streak
 
     # Consecutive Failures Operations
 
