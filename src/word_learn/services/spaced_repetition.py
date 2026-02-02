@@ -55,6 +55,9 @@ def calculate_next_date(base_date: date, stage: int) -> datetime:
         Datetime of when the word should next be reviewed (at midnight)
     """
     days = calculate_days_until_review(stage)
+    max_days = (date.max - base_date).days
+    if days > max_days:
+        days = max_days
     next_date = base_date + timedelta(days=days)
     # Return datetime at midnight
     return datetime.combine(next_date, time.min)

@@ -18,6 +18,8 @@ os.environ.setdefault("TARGET_LANG", "ru")
 from word_learn.database import Database
 from word_learn.repositories import PracticeRepository, WordsRepository
 
+_DB_UNAVAILABLE_REASON: str | None = None
+
 
 @pytest.fixture(scope="session")
 def event_loop():
@@ -35,7 +37,22 @@ async def db_pool() -> AsyncGenerator[asyncpg.Pool, None]:
         "postgresql://word_learn:password@localhost:5432/word_learn_test"
     )
 
-    pool = await asyncpg.create_pool(database_url, min_size=1, max_size=5)
+    global _DB_UNAVAILABLE_REASON
+    if _DB_UNAVAILABLE_REASON is not None:
+        pytest.skip(_DB_UNAVAILABLE_REASON)
+
+    try:
+        pool = await asyncio.wait_for(
+            asyncpg.create_pool(database_url, min_size=1, max_size=5),
+            timeout=3.0,
+        )
+    except (asyncio.TimeoutError, OSError, asyncpg.PostgresError) as exc:
+        _DB_UNAVAILABLE_REASON = (
+            "Test database not available; set DATABASE_URL to a reachable test DB "
+            "to run integration/e2e tests. "
+            f"({exc})"
+        )
+        pytest.skip(_DB_UNAVAILABLE_REASON)
 
     # Clean up tables before each test
     async with pool.acquire() as conn:
