@@ -162,8 +162,8 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
             await repository.reset_statistics(chat_id)
             await repository.clear_session_results(chat_id)
         else:
-            text = "Practiced all words!"
-            text += f"\n{streak_line}"
+            # Batch complete, more words remain
+            text = f"{count} words left"
 
         await message.answer(
             text,
