@@ -13,8 +13,8 @@ from word_learn.keyboards.practice import (
 )
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
+from word_learn.services.session_messages import format_session_complete_message
 from word_learn.services.stage_labels import get_stage_label
-from word_learn.services.streaks import format_streak_line
 
 router = Router()
 
@@ -150,20 +150,16 @@ async def _show_practice_word(message: Message, chat_id: int) -> None:
         settings = get_settings()
         today = datetime.now(settings.timezone).date()
         streak_days = await repository.update_streak(chat_id, today)
-        streak_line = format_streak_line(streak_days)
 
         if count == 0:
             # All daily words done - show simple stats
             stats = await repository.get_statistics(chat_id)
-            text = "Practiced all words!"
-            if stats.total > 0:
-                text += f"\n{stats.accuracy_text} of words were guessed correctly"
-            text += f"\n{streak_line}"
+            text = format_session_complete_message(count, stats, streak_days)
             await repository.reset_statistics(chat_id)
             await repository.clear_session_results(chat_id)
         else:
             # Batch complete, more words remain
-            text = f"{count} words left"
+            text = format_session_complete_message(count)
 
         await message.answer(
             text,
