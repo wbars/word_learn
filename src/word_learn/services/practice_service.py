@@ -149,7 +149,7 @@ class PracticeService:
         practice_word = await self.repository.get_practice_word(chat_id, word_id)
         old_stage = practice_word.stage
         new_stage = get_new_stage_correct(old_stage)
-        next_date = calculate_next_date(today, new_stage)
+        next_date = calculate_next_date(today, new_stage, tz=self.settings.timezone)
 
         # Get word translations for session result
         word_source = practice_word.get_translation(self.settings.target_lang) or "?"
@@ -175,6 +175,7 @@ class PracticeService:
         await self.repository.reset_consecutive_failures(chat_id, word_id)
         await self.repository.increment_statistics(chat_id, correct=True)
         await self.repository.remove_from_current_practice(chat_id, word_id)
+        await self.repository.remove_from_today_practice(chat_id, word_id)
 
         return old_stage, new_stage
 
@@ -204,7 +205,7 @@ class PracticeService:
         practice_word = await self.repository.get_practice_word(chat_id, word_id)
         old_stage = practice_word.stage
         new_stage = get_new_stage_incorrect()
-        next_date = calculate_next_date(today, new_stage)
+        next_date = calculate_next_date(today, new_stage, tz=self.settings.timezone)
 
         # Get word translations for session result
         word_source = practice_word.get_translation(self.settings.target_lang) or "?"
@@ -230,6 +231,7 @@ class PracticeService:
         await self.repository.increment_consecutive_failures(chat_id, word_id)
         await self.repository.increment_statistics(chat_id, correct=False)
         await self.repository.remove_from_current_practice(chat_id, word_id)
+        await self.repository.remove_from_today_practice(chat_id, word_id)
 
         return old_stage, new_stage
 
@@ -260,6 +262,7 @@ class PracticeService:
 
         await self.repository.mark_deleted(chat_id, word_id)
         await self.repository.remove_from_current_practice(chat_id, word_id)
+        await self.repository.remove_from_today_practice(chat_id, word_id)
 
     def parse_word_input(self, text: str) -> Optional[tuple[str, str]]:
         """Parse user input for adding a word.

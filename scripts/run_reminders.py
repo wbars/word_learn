@@ -86,8 +86,8 @@ async def process_reminders(bot: Bot, repository: PracticeRepository) -> int:
     sent_count = 0
 
     for reminder in due_reminders:
-        # Get word count for this user
-        word_count = await repository.count_words_to_practice(reminder.chat_id)
+        # Get word count for this user (all due words, not just today's pool)
+        word_count = await repository.count_all_due_words(reminder.chat_id)
 
         if word_count > 0:
             # Send reminder

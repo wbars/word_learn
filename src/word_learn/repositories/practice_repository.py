@@ -234,7 +234,10 @@ class PracticeRepository:
         chat_id: int,
         limit: int = 10,
     ) -> list[PracticeWord]:
-        """Get words due for practice from today's pool.
+        """Get words from today's pool that haven't been practiced yet.
+
+        Words are removed from the pool as they are answered,
+        so this returns only unfinished words.
 
         Args:
             chat_id: Telegram chat ID
@@ -243,27 +246,25 @@ class PracticeRepository:
         Returns:
             List of PracticeWord objects
         """
-        now = datetime.now(ZoneInfo(get_settings().tz))
-        today = now.date()
+        today = datetime.now(ZoneInfo(get_settings().tz)).date()
 
         query = """
             SELECT wp.id, wp.word_id, wp.chat_id, wp.next_date, wp.stage, wp.deleted,
                    w.id as w_id, w.en, w.nl, w.ru
             FROM word_practice wp
             JOIN words w ON w.id = wp.word_id
-            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $4
+            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $3
             WHERE wp.chat_id = $1
-              AND wp.next_date <= $2
               AND wp.deleted = FALSE
               AND wp.word_id NOT IN (
                   SELECT word_id FROM current_practice WHERE chat_id = $1
               )
             ORDER BY RANDOM()
-            LIMIT $3
+            LIMIT $2
         """
 
         async with Database.connection() as conn:
-            rows = await conn.fetch(query, chat_id, now, limit, today)
+            rows = await conn.fetch(query, chat_id, limit, today)
             result = []
             for row in rows:
                 row_dict = dict(row)
@@ -277,28 +278,29 @@ class PracticeRepository:
             return result
 
     async def count_words_to_practice(self, chat_id: int) -> int:
-        """Count words due for practice from today's pool.
+        """Count remaining words in today's practice pool.
+
+        Words are removed from the pool as they are answered,
+        so this counts only unfinished words.
 
         Args:
             chat_id: Telegram chat ID
 
         Returns:
-            Count of due words
+            Count of remaining words
         """
-        now = datetime.now(ZoneInfo(get_settings().tz))
-        today = now.date()
+        today = datetime.now(ZoneInfo(get_settings().tz)).date()
 
         query = """
             SELECT COUNT(*) as count
             FROM word_practice wp
-            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $3
+            JOIN today_practice tp ON tp.word_practice_id = wp.id AND tp.date = $2
             WHERE wp.chat_id = $1
-              AND wp.next_date <= $2
               AND wp.deleted = FALSE
         """
 
         async with Database.connection() as conn:
-            row = await conn.fetchrow(query, chat_id, now, today)
+            row = await conn.fetchrow(query, chat_id, today)
             return row["count"] if row else 0
 
     async def start_practice(
@@ -361,6 +363,31 @@ class PracticeRepository:
                 )
                 return PracticeWord.from_row(row_dict, word)
             return None
+
+    async def remove_from_today_practice(
+        self,
+        chat_id: int,
+        word_id: int,
+    ) -> None:
+        """Remove a word from today's practice pool.
+
+        Args:
+            chat_id: Telegram chat ID
+            word_id: Word ID
+        """
+        today = datetime.now(ZoneInfo(get_settings().tz)).date()
+
+        query = """
+            DELETE FROM today_practice
+            WHERE word_practice_id = (
+                SELECT id FROM word_practice
+                WHERE chat_id = $1 AND word_id = $2
+            )
+            AND date = $3
+        """
+
+        async with Database.connection() as conn:
+            await conn.execute(query, chat_id, word_id, today)
 
     async def remove_from_current_practice(
         self,
@@ -782,6 +809,31 @@ class PracticeRepository:
         async with Database.connection() as conn:
             rows = await conn.fetch(query, chat_id, word_ids)
             return {row["word_id"]: row["consecutive_failures"] for row in rows}
+
+    async def count_all_due_words(self, chat_id: int) -> int:
+        """Count all words due for practice (regardless of daily pool).
+
+        Used by reminders to show how many words are available.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            Count of due words
+        """
+        now = datetime.now(ZoneInfo(get_settings().tz))
+
+        query = """
+            SELECT COUNT(*) as count
+            FROM word_practice
+            WHERE chat_id = $1
+              AND next_date <= $2
+              AND deleted = FALSE
+        """
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(query, chat_id, now)
+            return row["count"] if row else 0
 
     # Confident Words Operations
 
