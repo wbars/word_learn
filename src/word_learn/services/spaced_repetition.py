@@ -14,6 +14,8 @@ all words learned on the same day from coming up together.
 """
 import random
 from datetime import date, datetime, time, timedelta
+from typing import Optional
+from zoneinfo import ZoneInfo
 
 # Maximum stage - caps the exponential growth
 MAX_STAGE = 33
@@ -44,12 +46,18 @@ def calculate_days_until_review(stage: int) -> int:
     return diff_days
 
 
-def calculate_next_date(base_date: date, stage: int) -> datetime:
+def calculate_next_date(
+    base_date: date,
+    stage: int,
+    tz: Optional[ZoneInfo] = None,
+) -> datetime:
     """Calculate the next review date based on current date and stage.
 
     Args:
         base_date: The date from which to calculate (usually today)
         stage: Current learning stage
+        tz: Timezone for the resulting datetime. When provided, midnight
+            is in this timezone (not UTC).
 
     Returns:
         Datetime of when the word should next be reviewed (at midnight)
@@ -59,8 +67,8 @@ def calculate_next_date(base_date: date, stage: int) -> datetime:
     if days > max_days:
         days = max_days
     next_date = base_date + timedelta(days=days)
-    # Return datetime at midnight
-    return datetime.combine(next_date, time.min)
+    # Return datetime at midnight in the given timezone
+    return datetime.combine(next_date, time.min, tzinfo=tz)
 
 
 def get_new_stage_correct(current_stage: int) -> int:

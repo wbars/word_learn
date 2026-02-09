@@ -1,7 +1,8 @@
 """Unit tests for spaced repetition algorithm."""
 import random
-from datetime import date, timedelta
+from datetime import date, datetime, time, timedelta
 from unittest.mock import patch
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -104,6 +105,59 @@ class TestCalculateNextDate:
         today = date(2024, 12, 31)
         result = calculate_next_date(today, 1)
         assert result.date() == date(2025, 1, 1)
+
+    def test_without_tz_returns_naive(self):
+        """Without tz parameter, result should be a naive datetime."""
+        today = date(2024, 1, 15)
+        result = calculate_next_date(today, 1)
+        assert result.tzinfo is None
+
+    def test_with_tz_returns_aware(self):
+        """With tz parameter, result should be timezone-aware."""
+        today = date(2024, 1, 15)
+        tz = ZoneInfo("Europe/Amsterdam")
+        result = calculate_next_date(today, 1, tz=tz)
+        assert result.tzinfo is tz
+
+    def test_with_tz_midnight_is_local(self):
+        """With tz, midnight should be in the given timezone, not UTC."""
+        today = date(2024, 1, 15)
+        tz = ZoneInfo("Europe/Amsterdam")
+        result = calculate_next_date(today, 0, tz=tz)
+        # Midnight Amsterdam = 2024-01-15 00:00:00+01:00
+        expected = datetime(2024, 1, 15, 0, 0, 0, tzinfo=tz)
+        assert result == expected
+
+    def test_with_tz_differs_from_utc(self):
+        """Timezone-aware midnight Amsterdam != midnight UTC."""
+        today = date(2024, 1, 15)
+        tz_ams = ZoneInfo("Europe/Amsterdam")
+        tz_utc = ZoneInfo("UTC")
+        result_ams = calculate_next_date(today, 1, tz=tz_ams)
+        result_utc = calculate_next_date(today, 1, tz=tz_utc)
+        # Same local time, different instants in time
+        assert result_ams.date() == result_utc.date()
+        assert result_ams != result_utc
+        # Amsterdam midnight is earlier in UTC than UTC midnight
+        assert result_ams < result_utc
+
+    def test_with_tz_stage_0_is_today(self):
+        """Stage 0 with tz should still return today at midnight local."""
+        today = date(2024, 6, 15)
+        tz = ZoneInfo("Europe/Amsterdam")
+        result = calculate_next_date(today, 0, tz=tz)
+        assert result.date() == today
+        assert result.hour == 0
+        assert result.minute == 0
+        assert result.tzinfo is tz
+
+    def test_with_tz_stage_1_is_tomorrow(self):
+        """Stage 1 with tz should return tomorrow at midnight local."""
+        today = date(2024, 6, 15)
+        tz = ZoneInfo("Europe/Amsterdam")
+        result = calculate_next_date(today, 1, tz=tz)
+        assert result.date() == date(2024, 6, 16)
+        assert result == datetime(2024, 6, 16, 0, 0, 0, tzinfo=tz)
 
 
 class TestMaxStage:
