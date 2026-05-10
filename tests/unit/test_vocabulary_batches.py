@@ -6,6 +6,7 @@ import pytest
 from word_learn.services.vocabulary_batches import (
     VocabularyEntry,
     load_vocabulary_entries,
+    resolve_batches_path,
     total_batches,
 )
 
@@ -41,3 +42,16 @@ def test_total_batches():
     ]
 
     assert total_batches(entries) == 3
+
+
+def test_resolve_batches_path_prefers_current_working_directory(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+):
+    batches_dir = tmp_path / "batches"
+    batches_dir.mkdir()
+    course_file = batches_dir / "course.tsv"
+    course_file.write_text("batch\tlevel\tnl\ten\n", encoding="utf-8")
+    monkeypatch.chdir(tmp_path)
+
+    assert resolve_batches_path("batches/course.tsv") == course_file

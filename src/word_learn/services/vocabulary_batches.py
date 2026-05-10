@@ -61,17 +61,21 @@ class ResetResult:
     course_progress: int
 
 
-def repo_root() -> Path:
-    """Return repository root both locally and inside the Docker image."""
-    return Path(__file__).resolve().parents[3]
-
-
 def resolve_batches_path(path_value: str) -> Path:
     """Resolve a configured batch file path."""
     path = Path(path_value)
     if path.is_absolute():
         return path
-    return repo_root() / path
+
+    cwd_path = Path.cwd() / path
+    if cwd_path.exists():
+        return cwd_path
+
+    package_root_path = Path(__file__).resolve().parents[3] / path
+    if package_root_path.exists():
+        return package_root_path
+
+    return cwd_path
 
 
 def load_vocabulary_entries(path: Path) -> list[VocabularyEntry]:
