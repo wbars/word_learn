@@ -89,7 +89,8 @@ async def cmd_reset_my_words(message: Message) -> None:
     parts = text.split(maxsplit=1)
     if len(parts) != 2 or parts[1].strip().lower() != "confirm":
         await message.answer(
-            "This will remove all words and batch progress for this chat only.\n"
+            "This will mark all practice cards as deleted and reset batch progress "
+            "for this chat only.\n"
             "Send /reset_my_words confirm to continue."
         )
         return
@@ -97,7 +98,7 @@ async def cmd_reset_my_words(message: Message) -> None:
     result = await VocabularyBatchService().reset_user_words(chat_id)
     await message.answer(
         "Reset complete for this chat.\n"
-        f"Practice cards removed: {result.word_practice}\n"
+        f"Practice cards marked deleted: {result.word_practice_marked_deleted}\n"
         f"Today's pool removed: {result.today_practice}\n"
         f"Current session words removed: {result.current_practice}\n"
         f"Skipped words removed: {result.word_skiplist}\n"

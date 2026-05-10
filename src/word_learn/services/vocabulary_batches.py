@@ -51,7 +51,7 @@ class BatchStatus:
 class ResetResult:
     """Counts removed while resetting a user's learning state."""
 
-    word_practice: int
+    word_practice_marked_deleted: int
     current_practice: int
     today_practice: int
     current_practice_stats: int
@@ -324,7 +324,7 @@ class VocabularyBatchService:
             )
 
     async def reset_user_words(self, chat_id: int) -> ResetResult:
-        """Remove all learning state for one chat and reset course progress."""
+        """Soft-delete all practice cards for one chat and reset course progress."""
         await self.ensure_progress_table()
 
         async with Database.transaction() as conn:
@@ -395,14 +395,15 @@ class VocabularyBatchService:
                 """,
                 chat_id,
             )
-            word_practice = await conn.fetchval(
+            word_practice_marked_deleted = await conn.fetchval(
                 """
-                WITH deleted_rows AS (
-                    DELETE FROM word_practice
-                    WHERE chat_id = $1
+                WITH updated_rows AS (
+                    UPDATE word_practice
+                    SET deleted = TRUE
+                    WHERE chat_id = $1 AND deleted = FALSE
                     RETURNING id
                 )
-                SELECT COUNT(*) FROM deleted_rows
+                SELECT COUNT(*) FROM updated_rows
                 """,
                 chat_id,
             )
@@ -420,7 +421,7 @@ class VocabularyBatchService:
             )
 
             return ResetResult(
-                word_practice=word_practice or 0,
+                word_practice_marked_deleted=word_practice_marked_deleted or 0,
                 current_practice=current_practice or 0,
                 today_practice=today_practice or 0,
                 current_practice_stats=current_practice_stats or 0,
