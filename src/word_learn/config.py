@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     daily_pool_max: int = 76
     practice_batch_size: int = 10
 
+    # Admin-only vocabulary course commands
+    admin_chat_id: int | None = None
+    vocabulary_batches_file: str = "batches/nl_en_a0_a2.tsv"
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

@@ -16,6 +16,7 @@ COPY src/ src/
 COPY alembic/ alembic/
 COPY alembic.ini .
 COPY scripts/ scripts/
+COPY batches/ batches/
 
 # Install Python dependencies
 RUN pip install --no-cache-dir .

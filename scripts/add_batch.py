@@ -2,13 +2,14 @@
 """Add a batch of words to the Dutch bot database.
 
 Usage:
-    python scripts/add_batch.py batches/batch_001_essential.txt [--chat-id CHAT_ID]
+    python scripts/add_batch.py batches/batch_001_essential.txt --chat-id CHAT_ID
 
-Default chat_id is 171946257 (Kirill)
+Alternatively set ADMIN_CHAT_ID in the environment.
 """
 
 import argparse
 import asyncio
+import os
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -17,9 +18,6 @@ import asyncpg
 
 # Dutch bot database
 DATABASE_URL = "postgresql://postgres:EluVnhukWpxAGDiaxRBoGxBCXtjCLoiy@shinkansen.proxy.rlwy.net:33993/railway"
-
-# Default chat_id (Kirill)
-DEFAULT_CHAT_ID = 171946257
 
 
 def parse_batch_file(filepath: str) -> list[tuple[str, str]]:
@@ -165,8 +163,8 @@ async def add_batch(filepath: str, chat_id: int, dry_run: bool = False):
 async def main():
     parser = argparse.ArgumentParser(description='Add word batch to Dutch bot database')
     parser.add_argument('batch_file', help='Path to batch file')
-    parser.add_argument('--chat-id', type=int, default=DEFAULT_CHAT_ID,
-                        help=f'Telegram chat ID (default: {DEFAULT_CHAT_ID})')
+    parser.add_argument('--chat-id', type=int, default=None,
+                        help='Telegram chat ID (or set ADMIN_CHAT_ID)')
     parser.add_argument('--dry-run', action='store_true',
                         help='Parse and validate only, do not insert')
 
@@ -176,7 +174,17 @@ async def main():
         print(f"Error: File not found: {args.batch_file}")
         sys.exit(1)
 
-    await add_batch(args.batch_file, args.chat_id, args.dry_run)
+    chat_id = args.chat_id
+    if chat_id is None:
+        env_chat_id = os.environ.get("ADMIN_CHAT_ID")
+        if not env_chat_id:
+            parser.error("Provide --chat-id or set ADMIN_CHAT_ID")
+        try:
+            chat_id = int(env_chat_id)
+        except ValueError:
+            parser.error("ADMIN_CHAT_ID must be an integer")
+
+    await add_batch(args.batch_file, chat_id, args.dry_run)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1003 @@
+# Dutch-English curated course for A0-A2, ordered by increasing difficulty.
+# Columns: batch<TAB>level<TAB>nl<TAB>en
+batch	level	nl	en
+1	A0	hallo	hello
+1	A0	dag	hi / bye
+1	A0	goedemorgen	good morning
+1	A0	goedemiddag	good afternoon
+1	A0	goedenavond	good evening
+1	A0	tot ziens	goodbye
+1	A0	dank je	thank you
+1	A0	alstublieft	please
+1	A0	ja	yes
+1	A0	nee	no
+2	A0	ik	I
+2	A0	jij	you
+2	A0	u	you (formal)
+2	A0	hij	he
+2	A0	zij	she
+2	A0	wij	we
+2	A0	jullie	you (plural)
+2	A0	ze	they
+2	A0	mijn	my
+2	A0	jouw	your
+3	A0	zijn	to be
+3	A0	ik ben	I am
+3	A0	jij bent	you are
+3	A0	hij is	he is
+3	A0	wij zijn	we are
+3	A0	hebben	to have
+3	A0	ik heb	I have
+3	A0	jij hebt	you have
+3	A0	het is	it is
+3	A0	er is	there is
+4	A0	wat	what
+4	A0	wie	who
+4	A0	waar	where
+4	A0	wanneer	when
+4	A0	waarom	why
+4	A0	hoe	how
+4	A0	welke	which
+4	A0	dit	this
+4	A0	dat	that
+4	A0	hier	here
+5	A0	nul	zero
+5	A0	een	one
+5	A0	twee	two
+5	A0	drie	three
+5	A0	vier	four
+5	A0	vijf	five
+5	A0	zes	six
+5	A0	zeven	seven
+5	A0	acht	eight
+5	A0	negen	nine
+6	A0	tien	ten
+6	A0	elf	eleven
+6	A0	twaalf	twelve
+6	A0	twintig	twenty
+6	A0	honderd	hundred
+6	A0	vandaag	today
+6	A0	morgen	tomorrow
+6	A0	gisteren	yesterday
+6	A0	nu	now
+6	A0	later	later
+7	A1	de man	man
+7	A1	de vrouw	woman
+7	A1	het kind	child
+7	A1	de jongen	boy
+7	A1	het meisje	girl
+7	A1	de vriend	friend
+7	A1	de vriendin	female friend / girlfriend
+7	A1	de familie	family
+7	A1	de vader	father
+7	A1	de moeder	mother
+8	A1	de broer	brother
+8	A1	de zus	sister
+8	A1	de ouder	parent
+8	A1	de collega	colleague
+8	A1	de buurman	neighbor
+8	A1	de buurvrouw	female neighbor
+8	A1	de leraar	teacher
+8	A1	de student	student
+8	A1	de dokter	doctor
+8	A1	de klant	customer
+9	A1	het huis	house
+9	A1	het appartement	apartment
+9	A1	de kamer	room
+9	A1	de keuken	kitchen
+9	A1	de badkamer	bathroom
+9	A1	de slaapkamer	bedroom
+9	A1	de woonkamer	living room
+9	A1	de deur	door
+9	A1	het raam	window
+9	A1	het bed	bed
+10	A1	de tafel	table
+10	A1	de stoel	chair
+10	A1	de sleutel	key
+10	A1	de tas	bag
+10	A1	de telefoon	phone
+10	A1	de computer	computer
+10	A1	het boek	book
+10	A1	het papier	paper
+10	A1	de pen	pen
+10	A1	het geld	money
+11	A1	het water	water
+11	A1	de koffie	coffee
+11	A1	de thee	tea
+11	A1	het brood	bread
+11	A1	de kaas	cheese
+11	A1	de melk	milk
+11	A1	het ei	egg
+11	A1	de appel	apple
+11	A1	de banaan	banana
+11	A1	de soep	soup
+12	A1	de winkel	shop
+12	A1	de supermarkt	supermarket
+12	A1	de prijs	price
+12	A1	de kassa	checkout
+12	A1	de bon	receipt
+12	A1	de korting	discount
+12	A1	betalen	to pay
+12	A1	kopen	to buy
+12	A1	zoeken	to search
+12	A1	nodig hebben	to need
+13	A1	gaan	to go
+13	A1	komen	to come
+13	A1	wonen	to live
+13	A1	werken	to work
+13	A1	leren	to learn
+13	A1	spreken	to speak
+13	A1	luisteren	to listen
+13	A1	kijken	to look / watch
+13	A1	lezen	to read
+13	A1	schrijven	to write
+14	A1	eten	to eat
+14	A1	drinken	to drink
+14	A1	slapen	to sleep
+14	A1	lopen	to walk
+14	A1	fietsen	to cycle
+14	A1	rijden	to drive
+14	A1	maken	to make
+14	A1	doen	to do
+14	A1	nemen	to take
+14	A1	geven	to give
+15	A1	goed	good
+15	A1	slecht	bad
+15	A1	groot	big
+15	A1	klein	small
+15	A1	lang	long / tall
+15	A1	kort	short
+15	A1	nieuw	new
+15	A1	oud	old
+15	A1	mooi	beautiful
+15	A1	lelijk	ugly
+16	A1	warm	warm
+16	A1	koud	cold
+16	A1	duur	expensive
+16	A1	goedkoop	cheap
+16	A1	makkelijk	easy
+16	A1	moeilijk	difficult
+16	A1	snel	fast
+16	A1	langzaam	slow
+16	A1	open	open
+16	A1	dicht	closed
+17	A1	de straat	street
+17	A1	de stad	city
+17	A1	het dorp	village
+17	A1	het station	station
+17	A1	de bushalte	bus stop
+17	A1	het park	park
+17	A1	het centrum	center
+17	A1	het kantoor	office
+17	A1	de school	school
+17	A1	het ziekenhuis	hospital
+18	A1	de fiets	bicycle
+18	A1	de auto	car
+18	A1	de bus	bus
+18	A1	de tram	tram
+18	A1	de trein	train
+18	A1	de metro	metro
+18	A1	het ticket	ticket
+18	A1	het perron	platform
+18	A1	de weg	road
+18	A1	de brug	bridge
+19	A1	links	left
+19	A1	rechts	right
+19	A1	rechtdoor	straight ahead
+19	A1	dichtbij	nearby
+19	A1	ver	far
+19	A1	voor	in front of / before
+19	A1	achter	behind
+19	A1	naast	next to
+19	A1	tussen	between
+19	A1	tegenover	opposite
+20	A1	de dag	day
+20	A1	de week	week
+20	A1	de maand	month
+20	A1	het jaar	year
+20	A1	de ochtend	morning
+20	A1	de middag	afternoon
+20	A1	de avond	evening
+20	A1	de nacht	night
+20	A1	het uur	hour
+20	A1	de minuut	minute
+21	A2	willen	to want
+21	A2	kunnen	can / to be able
+21	A2	moeten	must / to have to
+21	A2	mogen	may / to be allowed
+21	A2	zullen	will
+21	A2	hoeven	need to
+21	A2	ik wil	I want
+21	A2	ik kan	I can
+21	A2	ik moet	I must
+21	A2	ik mag	I may
+22	A2	Hoe gaat het?	How are you?
+22	A2	met mij gaat het goed	I am doing well
+22	A2	leuk je te ontmoeten	nice to meet you
+22	A2	geen probleem	no problem
+22	A2	tot morgen	see you tomorrow
+22	A2	misschien	maybe
+22	A2	natuurlijk	of course
+22	A2	eigenlijk	actually
+22	A2	bijna	almost
+22	A2	genoeg	enough
+23	A2	het hoofd	head
+23	A2	het gezicht	face
+23	A2	de hand	hand
+23	A2	de arm	arm
+23	A2	het been	leg
+23	A2	de voet	foot
+23	A2	de rug	back
+23	A2	ziek	sick
+23	A2	gezond	healthy
+23	A2	pijn	pain
+24	A2	de afspraak	appointment
+24	A2	de huisarts	general practitioner
+24	A2	de apotheek	pharmacy
+24	A2	het medicijn	medicine
+24	A2	de verzekering	insurance
+24	A2	de koorts	fever
+24	A2	hoesten	to cough
+24	A2	bellen	to call
+24	A2	wachten	to wait
+24	A2	helpen	to help
+25	A2	het weer	weather
+25	A2	de zon	sun
+25	A2	de regen	rain
+25	A2	de wind	wind
+25	A2	de wolk	cloud
+25	A2	het sneeuwt	it is snowing
+25	A2	het regent	it is raining
+25	A2	het is koud	it is cold
+25	A2	het is warm	it is warm
+25	A2	de temperatuur	temperature
+26	A2	het restaurant	restaurant
+26	A2	het café	cafe
+26	A2	de ober	waiter
+26	A2	de menukaart	menu
+26	A2	bestellen	to order
+26	A2	de rekening	bill
+26	A2	lekker	tasty
+26	A2	zonder	without
+26	A2	met	with
+26	A2	ik wil graag	I would like
+27	A2	het werk	work
+27	A2	de baan	job
+27	A2	de vergadering	meeting
+27	A2	de e-mail	email
+27	A2	het bericht	message
+27	A2	het project	project
+27	A2	beginnen	to start
+27	A2	eindigen	to end
+27	A2	uitleggen	to explain
+27	A2	begrijpen	to understand
+28	A2	praten	to talk
+28	A2	vertellen	to tell
+28	A2	vragen	to ask
+28	A2	antwoorden	to answer
+28	A2	herhalen	to repeat
+28	A2	betekenen	to mean
+28	A2	verstaan	to understand by hearing
+28	A2	langzamer	slower
+28	A2	Nederlands	Dutch
+28	A2	Engels	English
+29	A2	de kleding	clothes
+29	A2	de broek	trousers
+29	A2	het shirt	shirt
+29	A2	de jas	coat
+29	A2	de schoenen	shoes
+29	A2	passen	to fit / try on
+29	A2	ruilen	to exchange
+29	A2	terugbrengen	to return
+29	A2	repareren	to repair
+29	A2	het formulier	form
+30	A2	de huur	rent
+30	A2	huren	to rent
+30	A2	de verhuurder	landlord
+30	A2	de factuur	invoice / bill
+30	A2	de energie	energy
+30	A2	het contract	contract
+30	A2	verhuizen	to move house
+30	A2	schoonmaken	to clean
+30	A2	de was	laundry
+30	A2	het afval	trash
+31	A2	de bank	bank
+31	A2	de bankrekening	bank account
+31	A2	de pinpas	debit card
+31	A2	pinnen	to pay by card / withdraw cash
+31	A2	contant	cash
+31	A2	de gemeente	municipality
+31	A2	het paspoort	passport
+31	A2	het loket	counter
+31	A2	inschrijven	to register
+31	A2	aanvragen	to apply for
+32	A2	opstaan	to get up
+32	A2	aankomen	to arrive
+32	A2	meenemen	to take along
+32	A2	uitgaan	to go out
+32	A2	terugkomen	to come back
+32	A2	afspreken	to make an appointment / meet up
+32	A2	invullen	to fill in
+32	A2	opruimen	to tidy up
+32	A2	uitzetten	to turn off
+32	A2	aanzetten	to turn on
+33	A2	blij	happy
+33	A2	verdrietig	sad
+33	A2	boos	angry
+33	A2	bang	afraid
+33	A2	moe	tired
+33	A2	druk	busy
+33	A2	rustig	calm
+33	A2	zeker	sure
+33	A2	onzeker	unsure
+33	A2	tevreden	satisfied
+34	A2	omdat	because
+34	A2	maar	but
+34	A2	dus	so
+34	A2	als	if / when
+34	A2	terwijl	while
+34	A2	voordat	before
+34	A2	nadat	after
+34	A2	hoewel	although
+34	A2	daarom	therefore
+34	A2	bijvoorbeeld	for example
+35	A2	Ik zoek...	I am looking for...
+35	A2	Ik begrijp het niet	I do not understand
+35	A2	Kunt u dat herhalen?	Can you repeat that?
+35	A2	Waar is...?	Where is...?
+35	A2	Hoeveel kost het?	How much does it cost?
+35	A2	Ik heb een vraag	I have a question
+35	A2	Ik heb hulp nodig	I need help
+35	A2	Het spijt me	I am sorry
+35	A2	Geen dank	You are welcome
+35	A2	Tot straks	See you soon
+36	A2	altijd	always
+36	A2	nooit	never
+36	A2	vaak	often
+36	A2	soms	sometimes
+36	A2	meestal	usually
+36	A2	samen	together
+36	A2	alleen	alone
+36	A2	opnieuw	again
+36	A2	klaar	ready / done
+36	A2	bezig	busy / working on it
+37	A1	de naam	name
+37	A1	de voornaam	first name
+37	A1	de achternaam	last name
+37	A1	het adres	address
+37	A1	de postcode	postal code
+37	A1	het telefoonnummer	phone number
+37	A1	de geboortedatum	date of birth
+37	A1	de nationaliteit	nationality
+37	A1	alleenstaand	single
+37	A1	getrouwd	married
+38	A1	Nederland	the Netherlands
+38	A1	Belgie	Belgium
+38	A1	Duitsland	Germany
+38	A1	Frankrijk	France
+38	A1	Spanje	Spain
+38	A1	Engeland	England
+38	A1	Oekraine	Ukraine
+38	A1	Rusland	Russia
+38	A1	de taal	language
+38	A1	de moedertaal	native language
+39	A1	de afspraakbevestiging	appointment confirmation
+39	A1	het bewijs	proof
+39	A1	de handtekening	signature
+39	A1	de kopie	copy
+39	A1	het origineel	original document
+39	A1	de foto	photo
+39	A1	het identiteitsbewijs	ID document
+39	A1	de verblijfsvergunning	residence permit
+39	A1	de DigiD	DigiD
+39	A1	het BSN	citizen service number
+40	A1	dertig	thirty
+40	A1	veertig	forty
+40	A1	vijftig	fifty
+40	A1	zestig	sixty
+40	A1	zeventig	seventy
+40	A1	tachtig	eighty
+40	A1	negentig	ninety
+40	A1	duizend	thousand
+40	A1	de helft	half
+40	A1	een kwart	a quarter
+41	A1	eergisteren	the day before yesterday
+41	A1	overmorgen	the day after tomorrow
+41	A1	straks	later today
+41	A1	meteen	immediately
+41	A1	eerst	first
+41	A1	daarna	after that
+41	A1	vervolgens	then / subsequently
+41	A1	tenslotte	finally
+41	A1	sinds	since
+41	A1	tijdens	during
+42	A1	elke dag	every day
+42	A1	een keer per week	once a week
+42	A1	twee keer per maand	twice a month
+42	A1	zelden	rarely
+42	A1	gewoonlijk	commonly
+42	A1	normaal gesproken	normally
+42	A1	op tijd	on time
+42	A1	te laat	too late
+42	A1	vroeg	early
+42	A1	voorlopig	for now
+43	A1	afwassen	to wash dishes
+43	A1	stofzuigen	to vacuum
+43	A1	dweilen	to mop
+43	A1	koken	to cook
+43	A1	boodschappen doen	to do groceries
+43	A1	de afwas	dishes
+43	A1	de stofzuiger	vacuum cleaner
+43	A1	de emmer	bucket
+43	A1	de bezem	broom
+43	A1	de zeep	soap
+44	A1	de pan	pan
+44	A1	de koekenpan	frying pan
+44	A1	het mes	knife
+44	A1	de vork	fork
+44	A1	de lepel	spoon
+44	A1	het bord	plate
+44	A1	de kom	bowl
+44	A1	het glas	glass
+44	A1	de beker	cup
+44	A1	de koelkast	refrigerator
+45	A1	de aardappel	potato
+45	A1	de rijst	rice
+45	A1	de pasta	pasta
+45	A1	de kip	chicken
+45	A1	het vlees	meat
+45	A1	de vis	fish
+45	A1	de groente	vegetable
+45	A1	het fruit	fruit
+45	A1	de ui	onion
+45	A1	de tomaat	tomato
+46	A1	het pak	package
+46	A1	de fles	bottle
+46	A1	het blik	can
+46	A1	de zak	bag / sack
+46	A1	de doos	box
+46	A1	vers	fresh
+46	A1	houdbaar	shelf-stable
+46	A1	vegetarisch	vegetarian
+46	A1	het etiket	label
+46	A1	de ingredienten	ingredients
+47	A1	de trui	sweater
+47	A1	het overhemd	shirt with collar
+47	A1	de rok	skirt
+47	A1	de jurk	dress
+47	A1	de sokken	socks
+47	A1	de muts	winter hat
+47	A1	de handschoenen	gloves
+47	A1	de riem	belt
+47	A1	de maat	size
+47	A1	de paskamer	fitting room
+48	A1	rood	red
+48	A1	blauw	blue
+48	A1	groen	green
+48	A1	geel	yellow
+48	A1	zwart	black
+48	A1	wit	white
+48	A1	grijs	gray
+48	A1	bruin	brown
+48	A1	gestreept	striped
+48	A1	geruit	checked
+49	A1	de buik	belly
+49	A1	de borst	chest
+49	A1	de schouder	shoulder
+49	A1	de knie	knee
+49	A1	de elleboog	elbow
+49	A1	de vinger	finger
+49	A1	de teen	toe
+49	A1	het oog	eye
+49	A1	het oor	ear
+49	A1	de mond	mouth
+50	A2	hoofdpijn	headache
+50	A2	buikpijn	stomach ache
+50	A2	keelpijn	sore throat
+50	A2	verkouden	cold / having a cold
+50	A2	misselijk	nauseous
+50	A2	duizelig	dizzy
+50	A2	benauwd	short of breath
+50	A2	de wond	wound
+50	A2	bloeden	to bleed
+50	A2	herstellen	to recover
+51	A2	de tandarts	dentist
+51	A2	de specialist	specialist doctor
+51	A2	de assistent	assistant
+51	A2	het recept	prescription
+51	A2	de pil	pill
+51	A2	de zalf	ointment
+51	A2	de druppels	drops
+51	A2	de bijwerking	side effect
+51	A2	innemen	to take medicine
+51	A2	met spoed	urgently
+52	A2	de dienstregeling	timetable
+52	A2	de vertraging	delay
+52	A2	de overstap	transfer
+52	A2	overstappen	to transfer
+52	A2	instappen	to get in / board
+52	A2	uitstappen	to get out / alight
+52	A2	inchecken	to check in
+52	A2	uitchecken	to check out
+52	A2	de conducteur	conductor
+52	A2	de reisplanner	journey planner
+53	A2	het rijbewijs	driver's license
+53	A2	de parkeerplaats	parking place
+53	A2	de boete	fine
+53	A2	het kruispunt	intersection
+53	A2	het stoplicht	traffic light
+53	A2	de rotonde	roundabout
+53	A2	de file	traffic jam
+53	A2	inhalen	to overtake
+53	A2	remmen	to brake
+53	A2	tanken	to refuel
+54	A2	de ingang	entrance
+54	A2	de uitgang	exit
+54	A2	de hoek	corner
+54	A2	de overkant	other side
+54	A2	de verdieping	floor / story
+54	A2	de lift	elevator
+54	A2	de roltrap	escalator
+54	A2	om de hoek	around the corner
+54	A2	aan de linkerkant	on the left side
+54	A2	aan de rechterkant	on the right side
+55	A2	de gang	hallway
+55	A2	de zolder	attic
+55	A2	de kelder	basement
+55	A2	de verwarming	heating
+55	A2	de kast	cupboard / closet
+55	A2	de sofa	sofa
+55	A2	de lamp	lamp
+55	A2	het gordijn	curtain
+55	A2	het kleed	rug
+55	A2	de spiegel	mirror
+56	A2	de borg	deposit
+56	A2	de makelaar	estate agent
+56	A2	de huurprijs	rental price
+56	A2	inclusief	included
+56	A2	exclusief	excluded
+56	A2	de servicekosten	service charges
+56	A2	de gasrekening	gas bill
+56	A2	de waterrekening	water bill
+56	A2	de meterstand	meter reading
+56	A2	de sleuteloverdracht	key handover
+57	A2	de taak	task
+57	A2	de deadline	deadline
+57	A2	het verslag	report
+57	A2	de notitie	note
+57	A2	de planning	planning
+57	A2	de pauze	break
+57	A2	de baas	boss
+57	A2	de afdeling	department
+57	A2	aanwezig	present
+57	A2	afwezig	absent
+58	A2	de printer	printer
+58	A2	het scherm	screen
+58	A2	het toetsenbord	keyboard
+58	A2	de muis	mouse
+58	A2	de map	folder
+58	A2	het bestand	file
+58	A2	opslaan	to save
+58	A2	afdrukken	to print
+58	A2	uploaden	to upload
+58	A2	downloaden	to download
+59	A2	doorverbinden	to connect a call
+59	A2	ophangen	to hang up
+59	A2	opnemen	to answer the phone
+59	A2	de voicemail	voicemail
+59	A2	de bijlage	attachment
+59	A2	het onderwerp	subject
+59	A2	beantwoorden	to reply
+59	A2	doorsturen	to forward
+59	A2	verwijderen	to delete
+59	A2	ontvangen	to receive
+60	A2	de les	lesson
+60	A2	de cursus	course
+60	A2	het examen	exam
+60	A2	de toets	test
+60	A2	het huiswerk	homework
+60	A2	het cijfer	grade
+60	A2	slagen	to pass an exam
+60	A2	zakken	to fail an exam
+60	A2	oefenen	to practice
+60	A2	uitleg	explanation
+61	A2	de hobby	hobby
+61	A2	de muziek	music
+61	A2	de film	movie
+61	A2	de serie	series
+61	A2	het concert	concert
+61	A2	het museumbezoek	museum visit
+61	A2	schilderen	to paint
+61	A2	tekenen	to draw
+61	A2	wandelen	to hike / walk
+61	A2	fotograferen	to photograph
+62	A2	voetballen	to play football
+62	A2	tennissen	to play tennis
+62	A2	zwemmen	to swim
+62	A2	hardlopen	to run
+62	A2	sporten	to exercise
+62	A2	de sportschool	gym
+62	A2	de wedstrijd	match / game
+62	A2	het team	team
+62	A2	winnen	to win
+62	A2	verliezen	to lose
+63	A2	de vakantie	vacation
+63	A2	de reis	trip
+63	A2	het hotel	hotel
+63	A2	de reservering	reservation
+63	A2	de kamerkaart	room key card
+63	A2	de koffer	suitcase
+63	A2	de rugzak	backpack
+63	A2	de vlucht	flight
+63	A2	de luchthaven	airport
+63	A2	de grens	border
+64	A2	de politie	police
+64	A2	de brandweer	fire department
+64	A2	de ambulance	ambulance
+64	A2	de bibliotheekpas	library card
+64	A2	de balie	service desk
+64	A2	het loketnummer	counter number
+64	A2	wachtrij	queue
+64	A2	aan de beurt zijn	to be one's turn
+64	A2	melden	to report
+64	A2	afhalen	to collect
+65	A2	overmaken	to transfer money
+65	A2	geld opnemen	to withdraw money
+65	A2	storten	to deposit
+65	A2	het saldo	balance
+65	A2	de betaling	payment
+65	A2	de betaalpas	payment card
+65	A2	de creditcard	credit card
+65	A2	de betaalautomaat	payment terminal
+65	A2	automatische incasso	direct debit
+65	A2	de rente	interest
+66	A2	het pakket	package / parcel
+66	A2	de brief	letter
+66	A2	de envelop	envelope
+66	A2	de postzegel	stamp
+66	A2	de brievenbus	mailbox
+66	A2	verzenden	to send
+66	A2	bezorgen	to deliver
+66	A2	track en trace	track and trace
+66	A2	de bezorger	delivery person
+66	A2	het afhaalpunt	pickup point
+67	A2	de lente	spring
+67	A2	de zomer	summer
+67	A2	de herfst	autumn
+67	A2	de winter	winter
+67	A2	bewolkt	cloudy
+67	A2	zonnig	sunny
+67	A2	winderig	windy
+67	A2	droog	dry
+67	A2	nat	wet
+67	A2	glad	slippery
+68	A2	het bos	forest
+68	A2	het strand	beach
+68	A2	de zee	sea
+68	A2	de rivier	river
+68	A2	het meer	lake
+68	A2	de berg	mountain
+68	A2	de boom	tree
+68	A2	de bloem	flower
+68	A2	het milieu	environment
+68	A2	afval scheiden	to separate waste
+69	A2	het feest	party
+69	A2	de verjaardag	birthday
+69	A2	de uitnodiging	invitation
+69	A2	de gast	guest
+69	A2	de gastheer	host
+69	A2	de gastvrouw	hostess
+69	A2	feliciteren	to congratulate
+69	A2	uitnodigen	to invite
+69	A2	afzeggen	to cancel plans
+69	A2	meedoen	to join in
+70	A2	vriendelijk	friendly
+70	A2	onvriendelijk	unfriendly
+70	A2	geduldig	patient
+70	A2	ongeduldig	impatient
+70	A2	eerlijk	honest
+70	A2	oneerlijk	dishonest
+70	A2	grappig	funny
+70	A2	serieus	serious
+70	A2	verlegen	shy
+70	A2	trots	proud
+71	A2	zwaar	heavy
+71	A2	licht	light
+71	A2	dik	thick / fat
+71	A2	dun	thin
+71	A2	sterk	strong
+71	A2	zwak	weak
+71	A2	scherp	sharp
+71	A2	zacht	soft
+71	A2	hard	hard / loud
+71	A2	vol	full
+72	A2	leeg	empty
+72	A2	belangrijk	important
+72	A2	onbelangrijk	unimportant
+72	A2	handig	convenient
+72	A2	onhandig	inconvenient / clumsy
+72	A2	veilig	safe
+72	A2	gevaarlijk	dangerous
+72	A2	netjes	neat
+72	A2	vies	dirty
+72	A2	schoon	clean
+73	A2	brengen	to bring
+73	A2	halen	to fetch
+73	A2	dragen	to carry / wear
+73	A2	duwen	to push
+73	A2	trekken	to pull
+73	A2	vallen	to fall
+73	A2	staan	to stand
+73	A2	zitten	to sit
+73	A2	liggen	to lie
+73	A2	zetten	to put / place upright
+74	A2	leggen	to put / lay down
+74	A2	sturen	to send / steer
+74	A2	bespreken	to discuss
+74	A2	overleggen	to consult
+74	A2	reageren	to respond
+74	A2	bedanken	to thank
+74	A2	groeten	to greet
+74	A2	waarschuwen	to warn
+74	A2	klagen	to complain
+74	A2	beloven	to promise
+75	A2	onthouden	to memorize / remember
+75	A2	vergeten	to forget
+75	A2	beslissen	to decide
+75	A2	kiezen	to choose
+75	A2	geloven	to believe
+75	A2	twijfelen	to doubt
+75	A2	hopen	to hope
+75	A2	verwachten	to expect
+75	A2	voelen	to sense / feel
+75	A2	lijken	to seem
+76	A2	verhelpen	to fix
+76	A2	controleren	to check
+76	A2	proberen	to try
+76	A2	lukken	to succeed
+76	A2	mislukken	to fail
+76	A2	veranderen	to change
+76	A2	gebruiken	to use
+76	A2	kiezen voor	to opt for
+76	A2	aanpassen	to adjust
+76	A2	vergelijken	to compare
+77	A2	ik zou graag	I would like to
+77	A2	kunt u mij helpen	can you help me
+77	A2	mag ik iets vragen	may I ask something
+77	A2	ik moet gaan	I have to go
+77	A2	we kunnen afspreken	we can meet
+77	A2	ik wil betalen	I want to pay
+77	A2	het kan niet	it is not possible
+77	A2	dat hoeft niet	that is not necessary
+77	A2	het zou kunnen	it could be possible
+77	A2	ik ben van plan	I am planning to
+78	A2	aankleden	to get dressed
+78	A2	uitkleden	to get undressed
+78	A2	aanmelden	to sign up
+78	A2	afmelden	to cancel registration
+78	A2	ophalen	to pick someone up
+78	A2	weggooien	to throw away
+78	A2	nakijken	to check / review
+78	A2	meekijken	to watch along
+78	A2	iemand uitnodigen	to invite someone
+78	A2	doorgeven	to pass on
+79	A2	zich voelen	to feel oneself
+79	A2	zich herinneren	to recall
+79	A2	zich vergissen	to be mistaken
+79	A2	zich haasten	to hurry
+79	A2	zich schamen	to be ashamed
+79	A2	zich voorstellen	to introduce oneself
+79	A2	elkaar ontmoeten	to meet each other
+79	A2	elkaar helpen	to help each other
+79	A2	samenwerken	to cooperate
+79	A2	overeenkomen	to agree
+80	A2	en	and
+80	A2	of	or
+80	A2	want	because / since
+80	A2	toch	still / nevertheless
+80	A2	bovendien	moreover
+80	A2	daarnaast	besides that
+80	A2	nadien	afterward
+80	A2	daardoor	because of that
+80	A2	hiervoor	for this
+80	A2	daarvoor	for that
+81	A2	aan het begin	at the beginning
+81	A2	aan het einde	at the end
+81	A2	in plaats van	instead of
+81	A2	volgens mij	I think / in my view
+81	A2	naar mijn mening	in my opinion
+81	A2	in de buurt van	near
+81	A2	op zoek naar	looking for
+81	A2	tevreden over	satisfied with
+81	A2	boos op	angry with
+81	A2	bezorgd over	worried about
+82	A2	Heeft u even?	Do you have a moment?
+82	A2	Kunt u mij zeggen...?	Can you tell me...?
+82	A2	Mag ik de rekening?	May I have the bill?
+82	A2	Kan ik pinnen?	Can I pay by card?
+82	A2	Waar moet ik zijn?	Where should I go?
+82	A2	Wat bedoelt u?	What do you mean?
+82	A2	Wat is het verschil?	What is the difference?
+82	A2	Welke optie is beter?	Which option is better?
+82	A2	Kunt u langzamer praten?	Can you speak more slowly?
+82	A2	Kunt u het opschrijven?	Can you write it down?
+83	A2	Er is een probleem	There is a problem
+83	A2	Het werkt niet	It does not work
+83	A2	Ik ben iets kwijt	I lost something
+83	A2	Ik heb een klacht	I have a complaint
+83	A2	Dat klopt niet	That is not correct
+83	A2	Het is kapot	It is broken
+83	A2	Het is te duur	It is too expensive
+83	A2	Ik wil ruilen	I want to exchange it
+83	A2	Ik wil mijn geld terug	I want my money back
+83	A2	Wie kan mij helpen?	Who can help me?
+84	A2	Help!	Help!
+84	A2	Brand!	Fire!
+84	A2	Bel de politie!	Call the police!
+84	A2	Bel een ambulance!	Call an ambulance!
+84	A2	Ik voel me niet goed	I do not feel well
+84	A2	Ik ben gevallen	I have fallen
+84	A2	Het is dringend	It is urgent
+84	A2	Waar is de nooduitgang?	Where is the emergency exit?
+84	A2	Ik heb mijn paspoort verloren	I lost my passport
+84	A2	Ik heb mijn sleutel verloren	I lost my key
+85	A2	de website	website
+85	A2	de app	app
+85	A2	het wachtwoord	password
+85	A2	de gebruikersnaam	username
+85	A2	inloggen	to log in
+85	A2	uitloggen	to log out
+85	A2	registreren	to register online
+85	A2	bevestigen	to confirm
+85	A2	de melding	notification
+85	A2	de storing	outage / malfunction
+86	A2	het nieuws	news
+86	A2	de krant	newspaper
+86	A2	het artikel	article
+86	A2	de kop	headline
+86	A2	het programma	program
+86	A2	de uitzending	broadcast
+86	A2	de reclame	advertisement
+86	A2	de informatie	information
+86	A2	onderzoeken	to investigate
+86	A2	publiceren	to publish
+87	A2	het theater	theater
+87	A2	de bioscoop	cinema
+87	A2	de voorstelling	performance
+87	A2	de tentoonstelling	exhibition
+87	A2	de kaartjes	tickets
+87	A2	de rij	row
+87	A2	de plaats	seat / place
+87	A2	reserveren	to reserve
+87	A2	annuleren	to cancel officially
+87	A2	bezoeken	to visit
+88	A2	het voorgerecht	starter
+88	A2	het hoofdgerecht	main course
+88	A2	het nagerecht	dessert
+88	A2	de fooi	tip
+88	A2	de bediening	service staff
+88	A2	het terras	terrace
+88	A2	aanbevelen	to recommend
+88	A2	proeven	to taste
+88	A2	allergisch	allergic
+88	A2	veganistisch	vegan
+89	A2	snijden	to cut
+89	A2	schillen	to peel
+89	A2	bakken	to bake / fry
+89	A2	braden	to roast
+89	A2	koken in water	to boil
+89	A2	mengen	to mix
+89	A2	roeren	to stir
+89	A2	toevoegen	to add
+89	A2	opwarmen	to heat up
+89	A2	afkoelen	to cool down
+90	A2	de kapper	hairdresser
+90	A2	de schoenmaker	shoemaker
+90	A2	de fietsenmaker	bicycle repair shop
+90	A2	de wasserette	laundromat
+90	A2	de stomerij	dry cleaner
+90	A2	knippen	to cut hair
+90	A2	wassen	to wash
+90	A2	drogen	to dry
+90	A2	op maat maken	to tailor / customize
+90	A2	een afspraak maken	to make an appointment
+91	A2	de baby	baby
+91	A2	de peuter	toddler
+91	A2	de kleuter	preschool child
+91	A2	de oppas	babysitter
+91	A2	de kinderopvang	childcare
+91	A2	de basisschool	primary school
+91	A2	brengen naar school	to take to school
+91	A2	ophalen van school	to pick up from school
+91	A2	spelen	to play
+91	A2	huilen	to cry
+92	A2	de hond	dog
+92	A2	de kat	cat
+92	A2	de vogel	bird
+92	A2	het konijn	rabbit
+92	A2	de dierenarts	veterinarian
+92	A2	het voer	pet food
+92	A2	uitlaten	to walk a dog
+92	A2	blaffen	to bark
+92	A2	miauwen	to meow
+92	A2	aaien	to pet
+93	A2	het salaris	salary
+93	A2	het loon	wage
+93	A2	de belasting	tax
+93	A2	de toeslag	allowance
+93	A2	de uitkering	benefit
+93	A2	de vacature	job vacancy
+93	A2	solliciteren	to apply for a job
+93	A2	het sollicitatiegesprek	job interview
+93	A2	de ervaring	experience
+93	A2	het contract tekenen	to sign the contract
+94	A2	de zorgverzekering	health insurance
+94	A2	het eigen risico	deductible
+94	A2	de premie	premium
+94	A2	de huisartspraktijk	GP practice
+94	A2	de verwijsbrief	referral letter
+94	A2	de uitslag	test result
+94	A2	de balie van de gemeente	municipality desk
+94	A2	een afspraak inplannen	to schedule an appointment
+94	A2	gegevens wijzigen	to change personal details
+94	A2	een document ophalen	to pick up a document
+95	A2	lekken	to leak
+95	A2	de lekkage	leak
+95	A2	de monteur	technician
+95	A2	de reparatie	repair
+95	A2	verstopt	blocked / clogged
+95	A2	de afvoer	drain
+95	A2	de kraan	tap / faucet
+95	A2	de stroom	electricity
+95	A2	de schakelaar	switch
+95	A2	het stopcontact	power outlet
+96	A2	de agenda	calendar / agenda
+96	A2	de uitnodiging accepteren	to accept an invitation
+96	A2	de uitnodiging weigeren	to decline an invitation
+96	A2	verzetten	to reschedule
+96	A2	uitstellen	to postpone
+96	A2	herinneren aan	to remind about
+96	A2	de beschikbaarheid	availability
+96	A2	past het?	does it suit you?
+96	A2	ik ben beschikbaar	I am available
+96	A2	ik ben verhinderd	I am unavailable
+97	A2	Neem me niet kwalijk	Excuse me
+97	A2	Dat geeft niet	That is okay
+97	A2	Geen probleem hoor	No problem at all
+97	A2	Alvast bedankt	Thanks in advance
+97	A2	Fijne dag	Have a nice day
+97	A2	Fijn weekend	Have a nice weekend
+97	A2	Beterschap	Get well soon
+97	A2	Succes	Good luck
+97	A2	Veel plezier	Have fun
+97	A2	Eet smakelijk	Enjoy your meal
+98	A2	een fout maken	to make a mistake
+98	A2	een keuze maken	to make a choice
+98	A2	een vraag stellen	to ask a question
+98	A2	antwoord geven	to give an answer
+98	A2	hulp vragen	to ask for help
+98	A2	contact opnemen	to contact
+98	A2	rekening houden met	to take into account
+98	A2	op bezoek gaan	to visit someone
+98	A2	boodschappen halen	to get groceries
+98	A2	de tijd nemen	to take the time
+99	A2	Dat komt goed	It will be fine
+99	A2	Dat maakt niet uit	It does not matter
+99	A2	Ik weet het niet zeker	I am not sure
+99	A2	Ik kom eraan	I am on my way
+99	A2	Ik ben onderweg	I am on the way
+99	A2	Het maakt mij niet uit	I do not mind
+99	A2	Dat hangt ervan af	It depends
+99	A2	Ik heb geen idee	I have no idea
+99	A2	Dat is jammer	That is a pity
+99	A2	Gelukkig maar	Good thing / thankfully
+100	A2	Ik leer Nederlands	I am learning Dutch
+100	A2	Ik spreek een beetje Nederlands	I speak a little Dutch
+100	A2	Kunt u Engels spreken?	Can you speak English?
+100	A2	Ik zoek de juiste woorden	I am looking for the right words
+100	A2	Ik begrijp de vraag	I understand the question
+100	A2	Ik wil graag oefenen	I would like to practice
+100	A2	Ik maak soms fouten	I sometimes make mistakes
+100	A2	Kunt u mij verbeteren?	Can you correct me?
+100	A2	Dit woord ken ik	This word I know
+100	A2	Dit woord is nieuw	This word is new

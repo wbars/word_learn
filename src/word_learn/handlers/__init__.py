@@ -7,6 +7,7 @@ from word_learn.handlers.add_words import router as add_words_router
 from word_learn.handlers.practice import router as practice_router
 from word_learn.handlers.remind import router as remind_router
 from word_learn.handlers.reset import router as reset_router
+from word_learn.handlers.vocabulary_batches import router as vocabulary_batches_router
 
 
 def setup_routers() -> Router:
@@ -19,5 +20,6 @@ def setup_routers() -> Router:
     main_router.include_router(practice_router)
     main_router.include_router(remind_router)
     main_router.include_router(reset_router)
+    main_router.include_router(vocabulary_batches_router)
 
     return main_router
