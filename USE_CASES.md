@@ -255,6 +255,40 @@ Reset is done
 
 ---
 
+## Alternative UX (Opt-in)
+
+A chat can opt into an alternative interaction style. It is strictly opt-in:
+chats that never send the command keep the original UX byte-for-byte unchanged.
+
+### `/alternative_ux_on` - Enable Alternative UX
+**Trigger:** User sends `/alternative_ux_on`
+
+**Flow:**
+1. Persist `alternative_ux = TRUE` for this chat in `user_settings`
+2. Register chat-scoped native Telegram "menu" commands (so they appear only
+   for this chat): `add_next_batch`, `practice` ("Practice words"),
+   `alternative_ux_off`
+3. Confirm
+
+While enabled, the practice flow differs as follows:
+- The reveal prompt keeps its single full-width **Reveal** button.
+- After revealing, the answer keyboard has **no Delete button** and shows two
+  full-width buttons: **❌ Incorrect** on the left, **✅ Correct** on the right.
+  Callback data is unchanged (`finish {wordId} incorrect` / `... correct`).
+- To delete a word, **reply** `delete` to the word message. The word id is read
+  from the replied-to message's inline keyboard, the card is soft-deleted, and
+  the bot answers `Deleted!`.
+
+### `/alternative_ux_off` - Disable Alternative UX
+**Trigger:** User sends `/alternative_ux_off`
+
+**Flow:**
+1. Persist `alternative_ux = FALSE` for this chat
+2. Remove the chat-scoped menu commands (falls back to the default menu)
+3. Confirm — the chat is back to the default experience
+
+---
+
 ## Spaced Repetition Algorithm
 
 The bot uses a spaced repetition system based on the following formula:

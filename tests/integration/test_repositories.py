@@ -273,3 +273,30 @@ class TestReminders:
 
         reminder = await practice_repository.get_reminder(chat_id)
         assert reminder.remind_time == time(10, 0)
+
+
+class TestAlternativeUxSetting:
+    """Tests for the per-chat alternative UX flag."""
+
+    @pytest.mark.asyncio
+    async def test_defaults_to_false(self, practice_repository, chat_id):
+        """A chat that never opted in must read as disabled."""
+        assert await practice_repository.get_alternative_ux(chat_id) is False
+
+    @pytest.mark.asyncio
+    async def test_enable_and_disable(self, practice_repository, chat_id):
+        """Toggling persists and is idempotent via upsert."""
+        await practice_repository.set_alternative_ux(chat_id, True)
+        assert await practice_repository.get_alternative_ux(chat_id) is True
+
+        await practice_repository.set_alternative_ux(chat_id, False)
+        assert await practice_repository.get_alternative_ux(chat_id) is False
+
+    @pytest.mark.asyncio
+    async def test_setting_is_per_chat(self, practice_repository, chat_id):
+        """One chat opting in does not affect another chat."""
+        other_chat_id = chat_id + 1
+        await practice_repository.set_alternative_ux(chat_id, True)
+
+        assert await practice_repository.get_alternative_ux(chat_id) is True
+        assert await practice_repository.get_alternative_ux(other_chat_id) is False
