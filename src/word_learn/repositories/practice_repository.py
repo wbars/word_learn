@@ -835,6 +835,43 @@ class PracticeRepository:
             row = await conn.fetchrow(query, chat_id, now)
             return row["count"] if row else 0
 
+    # User Settings Operations
+
+    async def get_alternative_ux(self, chat_id: int) -> bool:
+        """Return whether the chat opted into the alternative UX.
+
+        Defaults to False when the chat has never toggled the setting, so
+        users who never sent the opt-in command keep the original UX.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            True if alternative UX is enabled for this chat
+        """
+        query = "SELECT alternative_ux FROM user_settings WHERE chat_id = $1"
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(query, chat_id)
+            return bool(row["alternative_ux"]) if row else False
+
+    async def set_alternative_ux(self, chat_id: int, enabled: bool) -> None:
+        """Enable or disable the alternative UX for a chat.
+
+        Args:
+            chat_id: Telegram chat ID
+            enabled: Whether the alternative UX should be active
+        """
+        query = """
+            INSERT INTO user_settings (chat_id, alternative_ux)
+            VALUES ($1, $2)
+            ON CONFLICT (chat_id)
+            DO UPDATE SET alternative_ux = $2
+        """
+
+        async with Database.connection() as conn:
+            await conn.execute(query, chat_id, enabled)
+
     # Confident Words Operations
 
     async def count_confident_words(self, chat_id: int) -> int:

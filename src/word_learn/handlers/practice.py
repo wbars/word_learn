@@ -9,12 +9,14 @@ from word_learn.config import get_settings
 from word_learn.keyboards.practice import (
     reveal_keyboard,
     answer_keyboard,
+    answer_keyboard_alternative,
     practice_more_keyboard,
 )
 from word_learn.repositories import PracticeRepository
 from word_learn.services.practice_service import PracticeService
 from word_learn.services.session_messages import format_session_complete_message
 from word_learn.services.stage_labels import get_stage_label
+from word_learn.services.user_settings import is_alternative_ux_enabled
 
 router = Router()
 
@@ -86,9 +88,16 @@ async def callback_reveal(callback: CallbackQuery) -> None:
     source_text = practice_word.get_translation(settings.source_lang) or "?"
     target_text = practice_word.get_translation(settings.target_lang) or "?"
 
+    # Opt-in chats get the wider, delete-less answer keyboard; everyone else
+    # keeps the original Correct/Incorrect/Delete layout.
+    if await is_alternative_ux_enabled(chat_id):
+        keyboard = answer_keyboard_alternative(word_id)
+    else:
+        keyboard = answer_keyboard(word_id)
+
     await callback.message.answer(
         f"{source_text} : {target_text}",
-        reply_markup=answer_keyboard(word_id),
+        reply_markup=keyboard,
     )
 
 

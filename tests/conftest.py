@@ -63,6 +63,7 @@ async def db_pool() -> AsyncGenerator[asyncpg.Pool, None]:
         await conn.execute("DELETE FROM word_practice")
         await conn.execute("DELETE FROM reminders")
         await conn.execute("DELETE FROM practice_streaks")
+        await conn.execute("DELETE FROM user_settings")
         await conn.execute("DELETE FROM words")
 
     # Patch the Database class to use our test pool

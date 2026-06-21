@@ -2,6 +2,7 @@
 from aiogram import Router
 
 from word_learn.handlers.start import router as start_router
+from word_learn.handlers.alternative_ux import router as alternative_ux_router
 from word_learn.handlers.add_word import router as add_word_router
 from word_learn.handlers.add_words import router as add_words_router
 from word_learn.handlers.practice import router as practice_router
@@ -15,6 +16,9 @@ def setup_routers() -> Router:
     main_router = Router()
 
     main_router.include_router(start_router)
+    # Registered before add_word so the "delete" reply handler is checked
+    # before the generic direct-text (add word) handler.
+    main_router.include_router(alternative_ux_router)
     main_router.include_router(add_word_router)
     main_router.include_router(add_words_router)
     main_router.include_router(practice_router)
