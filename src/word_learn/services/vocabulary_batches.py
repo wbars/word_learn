@@ -45,6 +45,7 @@ class BatchStatus:
     total_batches: int
     active_cards: int
     next_batch: int | None
+    archived_cards: int = 0
 
 
 @dataclass(frozen=True)
@@ -59,6 +60,7 @@ class ResetResult:
     session_word_results: int
     practice_streaks: int
     course_progress: int
+    archived_cards_kept: int = 0
 
 
 def resolve_batches_path(path_value: str) -> Path:
@@ -190,12 +192,18 @@ class VocabularyBatchService:
         count_query = """
             SELECT COUNT(*)
             FROM word_practice
-            WHERE chat_id = $1 AND deleted = FALSE
+            WHERE chat_id = $1 AND deleted = FALSE AND archived_at IS NULL
+        """
+        archived_query = """
+            SELECT COUNT(*)
+            FROM word_practice
+            WHERE chat_id = $1 AND deleted = FALSE AND archived_at IS NOT NULL
         """
 
         async with Database.connection() as conn:
             last_added_batch = await conn.fetchval(query, chat_id, self.course_id) or 0
             active_cards = await conn.fetchval(count_query, chat_id) or 0
+            archived_cards = await conn.fetchval(archived_query, chat_id) or 0
 
         next_batch = last_added_batch + 1 if last_added_batch < total else None
         return BatchStatus(
@@ -204,6 +212,7 @@ class VocabularyBatchService:
             total_batches=total,
             active_cards=active_cards,
             next_batch=next_batch,
+            archived_cards=archived_cards,
         )
 
     async def add_next_batch(self, chat_id: int) -> BatchAddResult | None:
@@ -328,7 +337,12 @@ class VocabularyBatchService:
             )
 
     async def reset_user_words(self, chat_id: int) -> ResetResult:
-        """Soft-delete all practice cards for one chat and reset course progress."""
+        """Soft-delete all active practice cards for one chat and reset course progress.
+
+        Archived cards (see :mod:`word_learn.services.word_archive`) are kept:
+        the user parked them on purpose, and /unarchive_words followed by a
+        second reset removes them too if that is really wanted.
+        """
         await self.ensure_progress_table()
 
         async with Database.transaction() as conn:
@@ -404,10 +418,18 @@ class VocabularyBatchService:
                 WITH updated_rows AS (
                     UPDATE word_practice
                     SET deleted = TRUE
-                    WHERE chat_id = $1 AND deleted = FALSE
+                    WHERE chat_id = $1 AND deleted = FALSE AND archived_at IS NULL
                     RETURNING id
                 )
                 SELECT COUNT(*) FROM updated_rows
+                """,
+                chat_id,
+            )
+            archived_cards_kept = await conn.fetchval(
+                """
+                SELECT COUNT(*)
+                FROM word_practice
+                WHERE chat_id = $1 AND deleted = FALSE AND archived_at IS NOT NULL
                 """,
                 chat_id,
             )
@@ -433,4 +455,5 @@ class VocabularyBatchService:
                 session_word_results=session_word_results or 0,
                 practice_streaks=practice_streaks or 0,
                 course_progress=course_progress or 0,
+                archived_cards_kept=archived_cards_kept or 0,
             )

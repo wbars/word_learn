@@ -18,17 +18,20 @@ Here are the available commands:
 /practice - Start a practice session
 /remind HH:mm - Set daily reminder
 /reset - Reset current practice session
+/archive_words - Archive all your words (reversible)
+/unarchive_words - Bring archived words back
 
 You can also send text directly to add words:
 • "cat, kat" - comma-separated
 • "cat kat" - space-separated (single words only)
+• several lines at once - one "word, translation" per line
 """
 
 ADMIN_BATCH_COMMANDS = """
 Admin Dutch-English course commands:
 /add_next_batch - Add the next curated batch
 /batch_status - Show curated batch progress
-/reset_my_words confirm - Reset all words for this chat
+/reset_my_words confirm - Delete active cards and reset batch progress (archived cards are kept)
 """
 
 

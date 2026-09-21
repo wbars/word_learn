@@ -65,6 +65,44 @@ class PracticeService:
 
         return word1, word2
 
+    async def add_custom_words(
+        self,
+        chat_id: int,
+        pairs: list[tuple[str, str]],
+    ) -> tuple[int, int]:
+        """Add several custom word pairs at once.
+
+        Pairs whose exact text is already an active card for the chat are
+        skipped, so pasting an overlapping list twice does not double cards.
+
+        Args:
+            chat_id: Telegram chat ID
+            pairs: (target_word, source_word) tuples, in message order
+
+        Returns:
+            Tuple of (pairs_added, pairs_skipped_as_duplicates)
+        """
+        added = skipped = 0
+        seen: set[tuple[str, str]] = set()
+        for target_word, source_word in pairs:
+            key = (target_word.casefold(), source_word.casefold())
+            if key in seen:
+                skipped += 1
+                continue
+            seen.add(key)
+            if await self.repository.has_active_custom_word(
+                chat_id,
+                {
+                    self.settings.target_lang.column_name: target_word,
+                    self.settings.source_lang.column_name: source_word,
+                },
+            ):
+                skipped += 1
+                continue
+            await self.add_custom_word(chat_id, target_word, source_word)
+            added += 1
+        return added, skipped
+
     async def get_daily_pool_count(self) -> int:
         """Get random count for daily practice pool.
 
@@ -263,6 +301,32 @@ class PracticeService:
         await self.repository.mark_deleted(chat_id, word_id)
         await self.repository.remove_from_current_practice(chat_id, word_id)
         await self.repository.remove_from_today_practice(chat_id, word_id)
+
+    def parse_batch_input(self, text: str) -> tuple[list[tuple[str, str]], list[str]]:
+        """Parse a multi-line message into word pairs, one pair per line.
+
+        Blank lines and lines starting with ``#`` (block headers/comments in a
+        pasted list) are ignored. Every other line goes through
+        :meth:`parse_word_input`.
+
+        Args:
+            text: Multi-line user input
+
+        Returns:
+            Tuple of (parsed pairs in order, lines that could not be parsed)
+        """
+        pairs: list[tuple[str, str]] = []
+        rejected: list[str] = []
+        for raw_line in text.splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parsed = self.parse_word_input(line)
+            if parsed is None or not parsed[0] or not parsed[1]:
+                rejected.append(line)
+            else:
+                pairs.append(parsed)
+        return pairs, rejected
 
     def parse_word_input(self, text: str) -> Optional[tuple[str, str]]:
         """Parse user input for adding a word.

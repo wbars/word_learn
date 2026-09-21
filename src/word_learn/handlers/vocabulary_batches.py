@@ -5,6 +5,7 @@ from aiogram.types import Message
 
 from word_learn.config import Language, get_settings
 from word_learn.services.vocabulary_batches import VocabularyBatchService
+from word_learn.services.word_archive import WordArchiveService
 
 router = Router()
 
@@ -73,13 +74,17 @@ async def cmd_batch_status(message: Message) -> None:
         f"Course: {status.course_id}\n"
         f"Added batches: {status.last_added_batch}/{status.total_batches}\n"
         f"Active cards: {status.active_cards}\n"
+        f"Archived cards: {status.archived_cards}\n"
         f"{next_text}"
     )
 
 
 @router.message(Command("reset_my_words"))
 async def cmd_reset_my_words(message: Message) -> None:
-    """Reset all learning state for the admin chat after explicit confirmation."""
+    """Delete the admin chat's active cards and reset batch progress after confirmation.
+
+    Archived cards (see /archive_words) are kept.
+    """
     chat_id = message.chat.id
     if not _is_admin(chat_id):
         await _answer_unauthorized(message)
@@ -87,18 +92,28 @@ async def cmd_reset_my_words(message: Message) -> None:
 
     text = message.text or ""
     parts = text.split(maxsplit=1)
+    service = VocabularyBatchService()
     if len(parts) != 2 or parts[1].strip().lower() != "confirm":
+        # Pure DB lookup: the prompt must not depend on the course file.
+        archived_cards = (await WordArchiveService().get_status(chat_id)).archived_cards
+        archived_note = ""
+        if archived_cards:
+            archived_note = (
+                f" Your {archived_cards} archived cards are kept "
+                "(/unarchive_words brings them back)."
+            )
         await message.answer(
-            "This will mark all practice cards as deleted and reset batch progress "
-            "for this chat only.\n"
+            "This will mark all active practice cards as deleted and reset batch progress "
+            f"for this chat only.{archived_note}\n"
             "Send /reset_my_words confirm to continue."
         )
         return
 
-    result = await VocabularyBatchService().reset_user_words(chat_id)
+    result = await service.reset_user_words(chat_id)
     await message.answer(
         "Reset complete for this chat.\n"
         f"Practice cards marked deleted: {result.word_practice_marked_deleted}\n"
+        f"Archived cards kept: {result.archived_cards_kept}\n"
         f"Today's pool removed: {result.today_practice}\n"
         f"Current session words removed: {result.current_practice}\n"
         f"Skipped words removed: {result.word_skiplist}\n"
