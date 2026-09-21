@@ -25,6 +25,8 @@ Hello! Welcome to our bot, Here are our available commands:
 /practice - Practice words
 /reset - Reset current practice session
 /remind - Set daily reminder
+/archive_words - Archive all your words (reversible)
+/unarchive_words - Bring archived words back
 ```
 
 ---
@@ -122,7 +124,7 @@ Done! Added words to learn: 7
 -- If no pool exists for today, create one
 INSERT INTO today_practice (word_practice_id)
 SELECT id FROM word_practice
-WHERE chat_id = ? AND next_date <= NOW() AND deleted = FALSE
+WHERE chat_id = ? AND next_date <= NOW() AND deleted = FALSE AND archived_at IS NULL
 ORDER BY RANDOM() LIMIT [67-76]  -- random limit
 ```
 
@@ -289,6 +291,132 @@ While enabled, the practice flow differs as follows:
 
 ---
 
+## Word Archive (reversible)
+
+Lets a chat park its whole current card list, build a new one from scratch,
+and later bring the old list back next to the new one. Archiving stamps
+`word_practice.archived_at` and leaves `stage` and `consecutive_failures`
+untouched. Restoring clears the stamp and moves each card's `next_date`
+forward by the number of days it spent archived (whole days on the local
+calendar in the configured timezone, so cards stay at local midnight across
+DST changes). The review schedule therefore resumes where it paused instead of
+dumping every card that came due meanwhile into the pool at once and crowding
+out the new words; genuinely forgotten cards still self-correct through the
+normal Incorrect -> stage 1 path.
+
+Card states in `word_practice`:
+
+| State | Condition |
+|-------|-----------|
+| active | `deleted = FALSE AND archived_at IS NULL` |
+| archived | `deleted = FALSE AND archived_at IS NOT NULL` |
+| deleted | `deleted = TRUE` |
+
+Every "active card" query (practice word lookup, daily pool creation, session
+queue, remaining/due counts used by the practice flow and reminders, confident
+word count, `/batch_status` active cards) excludes archived cards. Archived
+pairs still count as "already in practice" for `/add_next_batch`, and
+`/addWords` never re-offers them, so restoring cannot create duplicates.
+`/add` does no de-duplication (as before), so typing a word by hand that is
+also archived yields two pairs after restoring.
+
+Each `/archive_words` call is one *generation*: all cards it archives share the
+same `archived_at` value. `/unarchive_words` pops the newest generation, so
+parking list B to try list C does not also bring back list A.
+
+### `/archive_words` - Archive All Current Cards
+**Trigger:** User sends `/archive_words` (any chat, no confirmation: the
+action is fully reversible)
+
+**Flow (one transaction):**
+1. Lock and select all active cards of the chat
+2. Remove their entries from `today_practice`
+3. Clear `current_practice`, `current_practice_stats` and
+   `session_word_results` for the chat (clean slate)
+4. Set `archived_at = now()` on the selected cards
+
+With nothing active it is a no-op.
+
+**Response:**
+```
+Archived 800 cards.
+Current practice session cleared.        <- only when a session was running
+Add words with /add word1 word2 or send "cat, kat".
+Undo any time: /unarchive_words
+```
+Second archive on top of an existing one: `Archived 40 cards (840 archived in total).`
+Nothing to archive: `No active cards to archive.` (plus `800 cards are archived -
+/unarchive_words brings them back.` when an archive exists).
+
+Right after archiving, the `Practice words (0)` button on an `/add` reply and
+the `Practice more (0)` button count today's pool, which does not exist yet;
+tapping them (or `/practice`) creates the pool. This predates the archive
+feature.
+
+---
+
+### `/unarchive_words [all]` - Bring Archived Cards Back
+**Trigger:** User sends `/unarchive_words` (newest archive) or
+`/unarchive_words all` (every archive)
+
+**Flow (one transaction):**
+1. Pick the newest `archived_at` value (or all of them)
+2. For each generation: `archived_at = NULL`, `next_date` shifted forward by
+   the whole local days since that `archived_at`
+3. Report restored cards, active cards now, and what remains archived
+
+Restored cards are not pushed into today's pool; they join the next pool the
+practice flow creates once the current one runs out, so they line up behind
+whatever is left of today's list. Cards deleted before archiving stay deleted.
+
+**Response:**
+```
+Restored 800 cards archived on 21 Jun (review dates moved forward 21 days). Active cards: 840.
+                                       ^ only when at least one local day has passed
+12 cards from today's list come first, then the restored cards are mixed in.   <- only when today's pool has cards left
+Send /practice to continue.
+```
+Several archives at once (`/unarchive_words all` with 2+ generations; no
+per-archive dates or shift details):
+```
+Restored 840 cards from 2 archives. Active cards: 840.
+Send /practice to continue.
+```
+With an older archive still parked:
+```
+Restored 40 cards archived on 05 Jul. Active cards: 55.
+800 older cards remain archived - send /unarchive_words again to bring them back too, or /unarchive_words all for everything.
+Send /practice to continue.
+```
+Nothing archived: `No archived cards to restore.`
+
+---
+
+### Interplay with admin commands
+- `/batch_status` shows an `Archived cards: N` line.
+- `/reset_my_words confirm` deletes **active** cards only and keeps archived
+  cards; the confirmation prompt says so when an archive exists and the summary
+  reports `Archived cards kept: N`. To wipe everything: `/unarchive_words all`,
+  then reset.
+- A stale ✅/❌/🗑️ tap on a card that was archived (or deleted) after its
+  buttons were shown answers `Word not found.` instead of crashing.
+
+### Operations notes
+- Column added by alembic migration 007 (`archived_at TIMESTAMPTZ NULL`,
+  catalog-only, no table rewrite). The Dockerfile runs `alembic upgrade head`
+  before starting the bot; no runtime DDL.
+- The docker-compose reminder containers do not run migrations. During a
+  rolling deploy they may log `column "archived_at" does not exist` for up to
+  one check interval (60s) and then recover; nothing is sent twice.
+- Rolling back: revert the application code but **keep migration 007 in the
+  tree** (the extra nullable column is harmless to older code). Never remove a
+  migration file while `alembic_version` points at it, or `alembic upgrade
+  head` fails at container start. `alembic downgrade 006` drops the column and
+  thereby silently un-archives every chat, so restore archives first if that
+  matters.
+
+---
+
 ## Spaced Repetition Algorithm
 
 The bot uses a spaced repetition system based on the following formula:
@@ -350,7 +478,7 @@ Stats are reset after being displayed.
 ### Tables
 
 1. **words** - Vocabulary entries with translations
-2. **word_practice** - User's learning progress per word
+2. **word_practice** - User's learning progress per word (`deleted` = soft delete, `archived_at` = reversible archive)
 3. **word_skiplist** - Words user chose to skip during /addWords
 4. **current_practice** - Active practice session words
 5. **today_practice** - Daily word pool (67-76 random due words)

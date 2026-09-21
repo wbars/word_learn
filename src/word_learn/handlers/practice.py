@@ -121,6 +121,12 @@ async def callback_finish(callback: CallbackQuery) -> None:
     repository = PracticeRepository()
     service = PracticeService(repository)
 
+    # The card may have been deleted or archived since the buttons were shown
+    # (e.g. /archive_words while a prompt was on screen). Mirror callback_reveal.
+    if await repository.get_practice_word(chat_id, word_id) is None:
+        await callback.message.answer("Word not found.")
+        return
+
     # Handle action
     if action == "correct":
         old_stage, new_stage = await service.mark_correct(chat_id, word_id)
