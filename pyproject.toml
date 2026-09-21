@@ -24,6 +24,7 @@ dev = [
     "pytest-cov>=4.1.0",
     "mypy>=1.8.0",
     "ruff>=0.2.0",
+    "pgserver>=0.1.4",  # embedded PostgreSQL for DB tests when no server is reachable
 ]
 
 [tool.pytest.ini_options]
