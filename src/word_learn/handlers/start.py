@@ -24,6 +24,7 @@ Here are the available commands:
 You can also send text directly to add words:
 • "cat, kat" - comma-separated
 • "cat kat" - space-separated (single words only)
+• several lines at once - one "word, translation" per line
 """
 
 ADMIN_BATCH_COMMANDS = """

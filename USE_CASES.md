@@ -27,6 +27,8 @@ Hello! Welcome to our bot, Here are our available commands:
 /remind - Set daily reminder
 /archive_words - Archive all your words (reversible)
 /unarchive_words - Bring archived words back
+
+You can also send text directly to add words (one pair, or several lines at once)
 ```
 
 ---
@@ -70,6 +72,36 @@ Done! Added word to learn: cat : kot
 ```
 Use ',' for query with multiple whitespaces
 ```
+
+---
+
+### Multi-line Text - Add a Whole List at Once
+**Trigger:** User sends a message with several lines (e.g. lines selected and
+copied from a prepared word list such as `batches/welkom_in_nederland_woordenlijst.txt`)
+
+**Parsing Rules:**
+- Each non-empty line is parsed like a single direct-text message
+  (`word, translation`, first comma splits; single-space form also accepted)
+- Blank lines and lines starting with `#` (block headers) are ignored
+- Lines that cannot be parsed are reported back, the rest are still added
+
+**Flow:**
+1. Parse all lines into pairs
+2. Skip pairs that repeat inside the message, and pairs whose exact texts are
+   already an **active** card of this chat (archived or deleted cards do not
+   count, so a fresh list can be practiced after `/archive_words`)
+3. Create the usual two cards per remaining pair
+4. Summarise
+
+**Response:**
+```
+Done! Added 12 words to learn.
+Already in your list, skipped: 2          <- only when something was skipped
+Could not parse 1 lines (use "word, translation"):   <- only when needed
+• Hoofdstuk 3 Wonen
+[Practice words (N)]
+```
+With no parsable line: `No word pairs found. Put one pair per line: ...`
 
 ---
 

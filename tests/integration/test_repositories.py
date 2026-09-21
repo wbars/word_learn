@@ -300,3 +300,41 @@ class TestAlternativeUxSetting:
 
         assert await practice_repository.get_alternative_ux(chat_id) is True
         assert await practice_repository.get_alternative_ux(other_chat_id) is False
+
+
+class TestBatchCustomWords:
+    """PracticeService.add_custom_words against the database."""
+
+    @pytest.mark.asyncio
+    async def test_adds_two_cards_per_pair_and_skips_active_duplicates(
+        self, practice_repository, chat_id
+    ):
+        from word_learn.services.practice_service import PracticeService
+
+        service = PracticeService(practice_repository)
+        pairs = [("de zorg", "уход (healthcare)"), ("de premie", "взнос (premium)")]
+
+        added, skipped = await service.add_custom_words(chat_id, pairs)
+        assert (added, skipped) == (2, 0)
+        assert await practice_repository.count_all_due_words(chat_id) == 4
+
+        # Same list again (plus an in-message duplicate): nothing new is created.
+        added, skipped = await service.add_custom_words(chat_id, pairs + [pairs[0]])
+        assert (added, skipped) == (0, 3)
+        assert await practice_repository.count_all_due_words(chat_id) == 4
+
+    @pytest.mark.asyncio
+    async def test_archived_or_deleted_cards_do_not_count_as_duplicates(
+        self, practice_repository, chat_id
+    ):
+        from word_learn.services.practice_service import PracticeService
+        from word_learn.services.word_archive import WordArchiveService
+
+        service = PracticeService(practice_repository)
+        await service.add_custom_words(chat_id, [("de zorg", "уход")])
+        await WordArchiveService().archive_all(chat_id)
+
+        added, skipped = await service.add_custom_words(chat_id, [("de zorg", "уход")])
+
+        assert (added, skipped) == (1, 0)
+        assert await practice_repository.count_all_due_words(chat_id) == 2

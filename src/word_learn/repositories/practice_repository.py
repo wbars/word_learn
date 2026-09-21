@@ -66,6 +66,39 @@ class PracticeRepository:
                 [(word_id, chat_id, now) for word_id in word_ids],
             )
 
+    async def has_active_custom_word(
+        self,
+        chat_id: int,
+        translations: dict[str, str],
+    ) -> bool:
+        """Return True when an active card with exactly these texts exists.
+
+        Args:
+            chat_id: Telegram chat ID
+            translations: Dict mapping language columns to the exact texts
+
+        Returns:
+            Whether the chat already has a non-deleted, non-archived card
+            for a word row matching every given column
+        """
+        columns = list(translations.keys())
+        values = list(translations.values())
+        conditions = " AND ".join(f"w.{column} = ${i + 2}" for i, column in enumerate(columns))
+
+        query = f"""
+            SELECT 1
+            FROM word_practice wp
+            JOIN words w ON w.id = wp.word_id
+            WHERE wp.chat_id = $1
+              AND wp.deleted = FALSE
+              AND wp.archived_at IS NULL
+              AND {conditions}
+            LIMIT 1
+        """
+
+        async with Database.connection() as conn:
+            return await conn.fetchval(query, chat_id, *values) is not None
+
     async def get_word_by_id(self, word_id: int) -> Optional[Word]:
         """Get a word by its ID.
 
