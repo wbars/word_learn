@@ -28,6 +28,12 @@ Hello! Welcome to our bot, Here are our available commands:
 /archive_words - Archive all your words (reversible)
 /unarchive_words - Bring archived words back
 
+Settings (each is on by default):
+/reverse_cards_off - Add only "word → translation" when adding a word
+/reverse_cards_on - Also add the reversed "translation → word" card
+/daily_limit_off - Practice all due words, no daily cap
+/daily_limit_on - Cap the daily practice list at 67-76 words
+
 You can also send text directly to add words (one pair, or several lines at once)
 ```
 
@@ -40,7 +46,9 @@ You can also send text directly to add words (one pair, or several lines at once
 1. Parse arguments: `word1` (target language), `word2` (source language)
 2. Create bidirectional word entries:
    - Entry 1: `{target_lang: "cat", source_lang: "kot"}`
-   - Entry 2: `{target_lang: "kot", source_lang: "cat"}`
+   - Entry 2: `{target_lang: "kot", source_lang: "cat"}` - only while the
+     chat's reverse-cards toggle is on (the default, see
+     [Per-chat toggles](#per-chat-toggles))
 3. Add both words to user's practice queue with stage=0
 4. Confirm addition
 
@@ -90,7 +98,8 @@ copied from a prepared word list such as `batches/welkom_in_nederland_woordenlij
 2. Skip pairs that repeat inside the message, and pairs whose exact texts are
    already an **active** card of this chat (archived or deleted cards do not
    count, so a fresh list can be practiced after `/archive_words`)
-3. Create the usual two cards per remaining pair
+3. Create the usual two cards per remaining pair (one card when the chat
+   sent `/reverse_cards_off`; the setting is read once for the whole list)
 4. Summarise
 
 **Response:**
@@ -146,7 +155,8 @@ Done! Added words to learn: 7
 **Trigger:** User sends `/practice`
 
 **Flow:**
-1. Create or fetch today's daily pool (67-76 words)
+1. Create or fetch today's daily pool (67-76 words, or every due word when
+   the chat sent `/daily_limit_off`)
 2. Get up to 10 due words from today's pool
 3. Add words to `current_practice` table
 4. Trigger `/practiceWord` to show first word
@@ -157,7 +167,7 @@ Done! Added words to learn: 7
 INSERT INTO today_practice (word_practice_id)
 SELECT id FROM word_practice
 WHERE chat_id = ? AND next_date <= NOW() AND deleted = FALSE AND archived_at IS NULL
-ORDER BY RANDOM() LIMIT [67-76]  -- random limit
+ORDER BY RANDOM() LIMIT [67-76]  -- random limit; no LIMIT with /daily_limit_off
 ```
 
 **No Words Response:**
@@ -320,6 +330,89 @@ While enabled, the practice flow differs as follows:
 1. Persist `alternative_ux = FALSE` for this chat
 2. Remove the chat-scoped menu commands (falls back to the default menu)
 3. Confirm — the chat is back to the default experience
+
+---
+
+## Per-chat toggles
+
+Two more on/off switches in the style of `/alternative_ux_on|off`. Both live
+in the chat's `user_settings` row and both default to **on**, so a chat that
+never sends either command behaves exactly as before the commands existed.
+Toggling one setting never changes another (each command writes only its own
+column; a row created by one toggle gets the other columns' defaults).
+
+| Setting | Column | Default | Off means |
+|---------|--------|---------|-----------|
+| Reverse cards | `user_settings.reverse_cards` | `true` | adding a word creates one card only |
+| Daily limit | `user_settings.daily_limit` | `true` | today's pool takes every due word |
+
+### `/reverse_cards_on` / `/reverse_cards_off` - Reversed card on add
+**Trigger:** User sends `/reverse_cards_off` (or `_on`)
+
+Applies to every custom-word path: `/add word1 word2`, direct text
+(`cat, kat`), and multi-line pastes. With the toggle **off** only the forward
+card is created (prompt = the word as typed, answer = the translation); the
+reversed card (prompt = translation) is not. Cards already in the list are
+never changed by the toggle. Duplicate detection for multi-line pastes keeps
+working on the forward card, so a pair added with the toggle off and pasted
+again after turning it on is reported as "already in your list" and does not
+get a reversed card retroactively.
+
+Not affected: `/addWords` (always one card per database word) and the admin
+`/add_next_batch` (always two cards per curated pair).
+
+**Responses:**
+```
+Reverse cards disabled. Every word you add gets one card: word → translation.
+Words already in your list are not changed.
+Send /reverse_cards_on to also add translation → word again.
+```
+```
+Reverse cards enabled. Every word you add gets two cards: word → translation and translation → word.
+Send /reverse_cards_off to add only word → translation.
+```
+
+### `/daily_limit_on` / `/daily_limit_off` - Daily practice cap
+**Trigger:** User sends `/daily_limit_off` (or `_on`)
+
+With the limit **on** (default) every new daily pool takes a random 67-76 due
+cards (`daily_pool_min`/`daily_pool_max`). With it **off** the pool takes every
+due card. Both commands take effect immediately, not just at the next pool:
+
+- `/daily_limit_off` stores the flag, then tops today's pool up with every
+  due card that is not in it yet (creating the pool if there is none). The
+  reply shows the resulting pool size.
+- `/daily_limit_on` stores the flag and, when the limit was actually off,
+  trims today's pool back to a random 67-76 cards. Cards of the running
+  session (`current_practice`) are kept first, the rest of the kept slots are
+  picked at random. Removed cards are only taken out of `today_practice`;
+  they stay due and return in the next pool. Nothing is removed when the pool
+  already holds at most 76 (`daily_pool_max`) cards, and re-sending
+  `/daily_limit_on` while the limit is already on never touches the list
+  (reply: `Daily limit is already on. ...`).
+
+The flag is written before the pool is changed, so a `/practice` sent right
+after the command already builds the pool the new way.
+
+**Responses:**
+```
+Daily limit disabled. Your practice list now takes every due word instead of 67-76 a day.
+Today's list: 312 words.
+Send /daily_limit_on to bring the limit back.
+```
+```
+Daily limit enabled. Your practice list takes 67-76 due words a day.
+Today's list trimmed to 72 words; the other 240 stay due and come back in the next list.   <- only when something was trimmed
+Send /daily_limit_off to practice all due words at once.
+```
+
+### Operations notes
+- Columns added by alembic migration 008 (`reverse_cards BOOLEAN NOT NULL
+  DEFAULT true`, `daily_limit BOOLEAN NOT NULL DEFAULT true` on
+  `user_settings`); existing rows get `true`, i.e. unchanged behaviour.
+- Rolling back the application code is safe with migration 008 still applied
+  (older code never reads the new columns). `alembic downgrade 007` drops the
+  columns and thereby forgets every chat's toggles.
 
 ---
 
@@ -487,6 +580,10 @@ To prevent overwhelming users, a daily pool limits practice to 67-76 words:
 
 **Why 67-76?** This provides variety while being manageable in a single day.
 
+A chat can switch the cap off per chat with `/daily_limit_off` (every due word
+goes into the pool) and back on with `/daily_limit_on`; see
+[Per-chat toggles](#per-chat-toggles).
+
 ---
 
 ## Session Statistics
@@ -516,6 +613,7 @@ Stats are reset after being displayed.
 5. **today_practice** - Daily word pool (67-76 random due words)
 6. **current_practice_stats** - Session statistics (correct/total)
 7. **reminders** - Daily reminder settings
+8. **user_settings** - Per-chat toggles (`alternative_ux`, `reverse_cards`, `daily_limit`)
 
 ---
 

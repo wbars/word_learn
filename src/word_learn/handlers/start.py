@@ -21,6 +21,12 @@ Here are the available commands:
 /archive_words - Archive all your words (reversible)
 /unarchive_words - Bring archived words back
 
+Settings (each is on by default):
+/reverse_cards_off - Add only "word → translation" when adding a word
+/reverse_cards_on - Also add the reversed "translation → word" card
+/daily_limit_off - Practice all due words, no daily cap
+/daily_limit_on - Cap the daily practice list at 67-76 words
+
 You can also send text directly to add words:
 • "cat, kat" - comma-separated
 • "cat kat" - space-separated (single words only)

@@ -29,21 +29,30 @@ class PracticeService:
         chat_id: int,
         target_word: str,
         source_word: str,
-    ) -> tuple[Word, Word]:
-        """Add a custom word with bidirectional translations.
+        reverse: Optional[bool] = None,
+    ) -> tuple[Word, Optional[Word]]:
+        """Add a custom word, by default with its reversed card.
 
-        Creates two word entries and adds both to the user's practice queue:
-        1. target_lang -> source_lang
-        2. source_lang -> target_lang
+        Creates the word entry (target_lang -> source_lang) and adds it to the
+        user's practice queue. Unless the chat switched reverse cards off
+        (``/reverse_cards_off``), a second, reversed entry
+        (source_lang -> target_lang) is created and queued as well.
 
         Args:
             chat_id: Telegram chat ID
             target_word: Word in target language
             source_word: Word in source language
+            reverse: Whether to also create the reversed card. None (default)
+                reads the chat's reverse-cards setting, which is on unless the
+                chat turned it off.
 
         Returns:
-            Tuple of (word1, word2) created
+            Tuple of (word1, word2); word2 is None when no reversed card was
+            created
         """
+        if reverse is None:
+            reverse = await self.repository.get_reverse_cards(chat_id)
+
         target_lang = self.settings.target_lang
         source_lang = self.settings.source_lang
 
@@ -54,6 +63,9 @@ class PracticeService:
         }
         word1 = await self.repository.add_word(translations1)
         await self.repository.add_to_practice(chat_id, [word1.id])
+
+        if not reverse:
+            return word1, None
 
         # Create second word: source -> target (reversed)
         translations2 = {
@@ -74,6 +86,7 @@ class PracticeService:
 
         Pairs whose exact text is already an active card for the chat are
         skipped, so pasting an overlapping list twice does not double cards.
+        The chat's reverse-cards setting is read once for the whole list.
 
         Args:
             chat_id: Telegram chat ID
@@ -82,6 +95,7 @@ class PracticeService:
         Returns:
             Tuple of (pairs_added, pairs_skipped_as_duplicates)
         """
+        reverse = await self.repository.get_reverse_cards(chat_id)
         added = skipped = 0
         seen: set[tuple[str, str]] = set()
         for target_word, source_word in pairs:
@@ -99,7 +113,7 @@ class PracticeService:
             ):
                 skipped += 1
                 continue
-            await self.add_custom_word(chat_id, target_word, source_word)
+            await self.add_custom_word(chat_id, target_word, source_word, reverse=reverse)
             added += 1
         return added, skipped
 
@@ -114,10 +128,25 @@ class PracticeService:
             self.settings.daily_pool_max,
         )
 
+    async def get_daily_pool_size(self, chat_id: int) -> Optional[int]:
+        """Get the cap for the chat's next daily pool.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            A random 67-76 while the chat's daily limit is on (the default),
+            None when the chat switched it off with /daily_limit_off
+        """
+        if await self.repository.get_daily_limit(chat_id):
+            return await self.get_daily_pool_count()
+        return None
+
     async def create_daily_pool(self, chat_id: int) -> list[int]:
         """Create daily practice pool for a user.
 
-        Selects a random subset (67-76) of due words for today's practice.
+        Selects a random subset (67-76) of due words for today's practice, or
+        every due word when the chat switched the daily limit off.
 
         Args:
             chat_id: Telegram chat ID
@@ -125,8 +154,50 @@ class PracticeService:
         Returns:
             List of word_practice IDs in today's pool
         """
-        pool_size = await self.get_daily_pool_count()
+        pool_size = await self.get_daily_pool_size(chat_id)
         return await self.repository.create_today_practice(chat_id, pool_size)
+
+    async def fill_today_pool(self, chat_id: int) -> int:
+        """Put every due word into today's pool right away.
+
+        Called when the chat switches the daily limit off, so the change is
+        visible immediately instead of after the current pool runs out. Cards
+        already in the pool stay; the pool is created if it does not exist.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            Number of cards in today's pool afterwards
+        """
+        await self.repository.create_today_practice(chat_id, limit=None)
+        return await self.repository.count_words_to_practice(chat_id)
+
+    async def trim_today_pool(self, chat_id: int) -> tuple[int, int]:
+        """Shrink today's pool back to a daily-limit size.
+
+        Called when the chat switches the daily limit back on. Cards of the
+        running session are kept; removed cards stay due and return in the
+        next pool. Does nothing when the pool already holds at most
+        ``daily_pool_max`` cards, so a pool that was built with the limit on
+        is never re-rolled to a smaller random size.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            Tuple of (cards_removed, cards_remaining_in_pool)
+        """
+        current = await self.repository.count_words_to_practice(chat_id)
+        if current <= self.settings.daily_pool_max:
+            return 0, current
+
+        limit = await self.get_daily_pool_count()
+        removed = await self.repository.trim_today_practice(chat_id, limit)
+        # Recount instead of subtracting: the trim also drops stale pool rows
+        # of deleted/archived cards, which the count above never included.
+        remaining = await self.repository.count_words_to_practice(chat_id)
+        return removed, remaining
 
     async def start_practice_session(
         self,

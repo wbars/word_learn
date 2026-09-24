@@ -224,16 +224,20 @@ class PracticeRepository:
     async def create_today_practice(
         self,
         chat_id: int,
-        limit: int,
+        limit: Optional[int],
     ) -> list[int]:
-        """Create today's practice pool.
+        """Create (or top up) today's practice pool.
+
+        Due cards already in today's pool are left in place (the insert is
+        ``ON CONFLICT DO NOTHING``), so calling this again only adds cards.
 
         Args:
             chat_id: Telegram chat ID
-            limit: Maximum number of words to include
+            limit: Maximum number of words to include, or None to take every
+                due word (the chat switched the daily limit off)
 
         Returns:
-            List of word_practice IDs added to today's pool
+            List of word_practice IDs selected for today's pool
         """
         now = datetime.now(ZoneInfo(get_settings().tz))
         today = now.date()
@@ -246,8 +250,11 @@ class PracticeRepository:
               AND deleted = FALSE
               AND archived_at IS NULL
             ORDER BY RANDOM()
-            LIMIT $3
         """
+        select_args: list[object] = [chat_id, now]
+        if limit is not None:
+            select_query += " LIMIT $3"
+            select_args.append(limit)
 
         insert_query = """
             INSERT INTO today_practice (word_practice_id, date)
@@ -256,7 +263,7 @@ class PracticeRepository:
         """
 
         async with Database.connection() as conn:
-            rows = await conn.fetch(select_query, chat_id, now, limit)
+            rows = await conn.fetch(select_query, *select_args)
             practice_ids = [row["id"] for row in rows]
 
             if practice_ids:
@@ -344,6 +351,54 @@ class PracticeRepository:
         async with Database.connection() as conn:
             row = await conn.fetchrow(query, chat_id, today)
             return row["count"] if row else 0
+
+    async def trim_today_practice(self, chat_id: int, limit: int) -> int:
+        """Shrink today's pool to at most ``limit`` active cards.
+
+        Used when a chat switches the daily limit back on after practicing
+        without one. Cards of the running session (``current_practice``) are
+        kept first, the rest of the kept slots are filled at random. Removed
+        cards stay due and simply return in the next pool.
+
+        Args:
+            chat_id: Telegram chat ID
+            limit: Number of cards to keep in today's pool
+
+        Returns:
+            Number of pool entries removed
+        """
+        today = datetime.now(ZoneInfo(get_settings().tz)).date()
+
+        query = """
+            WITH kept AS (
+                SELECT tp.word_practice_id
+                FROM today_practice tp
+                JOIN word_practice wp ON wp.id = tp.word_practice_id
+                WHERE tp.date = $2
+                  AND wp.chat_id = $1
+                  AND wp.deleted = FALSE
+                  AND wp.archived_at IS NULL
+                ORDER BY
+                    (wp.word_id IN (
+                        SELECT word_id FROM current_practice WHERE chat_id = $1
+                    )) DESC,
+                    RANDOM()
+                LIMIT $3
+            ),
+            removed AS (
+                DELETE FROM today_practice tp
+                USING word_practice wp
+                WHERE tp.word_practice_id = wp.id
+                  AND tp.date = $2
+                  AND wp.chat_id = $1
+                  AND tp.word_practice_id NOT IN (SELECT word_practice_id FROM kept)
+                RETURNING tp.word_practice_id
+            )
+            SELECT COUNT(*) FROM removed
+        """
+
+        async with Database.connection() as conn:
+            return await conn.fetchval(query, chat_id, today, limit) or 0
 
     async def start_practice(
         self,
@@ -881,6 +936,42 @@ class PracticeRepository:
             return row["count"] if row else 0
 
     # User Settings Operations
+    #
+    # One row per chat in ``user_settings``; a missing row means "never
+    # toggled anything" and every flag reads as its default. Column names are
+    # interpolated into SQL, so they must come from _USER_SETTING_COLUMNS.
+
+    _USER_SETTING_COLUMNS = frozenset({"alternative_ux", "reverse_cards", "daily_limit"})
+
+    async def _get_user_flag(self, chat_id: int, column: str, default: bool) -> bool:
+        """Read one boolean column of the chat's settings row (or ``default``)."""
+        if column not in self._USER_SETTING_COLUMNS:
+            raise ValueError(f"Unknown user setting: {column}")
+
+        query = f"SELECT {column} FROM user_settings WHERE chat_id = $1"
+
+        async with Database.connection() as conn:
+            row = await conn.fetchrow(query, chat_id)
+            return bool(row[column]) if row else default
+
+    async def _set_user_flag(self, chat_id: int, column: str, enabled: bool) -> None:
+        """Upsert one boolean column of the chat's settings row.
+
+        Columns not named keep their value (or get their server default when
+        the row is created), so toggling one setting never touches another.
+        """
+        if column not in self._USER_SETTING_COLUMNS:
+            raise ValueError(f"Unknown user setting: {column}")
+
+        query = f"""
+            INSERT INTO user_settings (chat_id, {column})
+            VALUES ($1, $2)
+            ON CONFLICT (chat_id)
+            DO UPDATE SET {column} = $2
+        """
+
+        async with Database.connection() as conn:
+            await conn.execute(query, chat_id, enabled)
 
     async def get_alternative_ux(self, chat_id: int) -> bool:
         """Return whether the chat opted into the alternative UX.
@@ -894,11 +985,7 @@ class PracticeRepository:
         Returns:
             True if alternative UX is enabled for this chat
         """
-        query = "SELECT alternative_ux FROM user_settings WHERE chat_id = $1"
-
-        async with Database.connection() as conn:
-            row = await conn.fetchrow(query, chat_id)
-            return bool(row["alternative_ux"]) if row else False
+        return await self._get_user_flag(chat_id, "alternative_ux", default=False)
 
     async def set_alternative_ux(self, chat_id: int, enabled: bool) -> None:
         """Enable or disable the alternative UX for a chat.
@@ -907,15 +994,54 @@ class PracticeRepository:
             chat_id: Telegram chat ID
             enabled: Whether the alternative UX should be active
         """
-        query = """
-            INSERT INTO user_settings (chat_id, alternative_ux)
-            VALUES ($1, $2)
-            ON CONFLICT (chat_id)
-            DO UPDATE SET alternative_ux = $2
-        """
+        await self._set_user_flag(chat_id, "alternative_ux", enabled)
 
-        async with Database.connection() as conn:
-            await conn.execute(query, chat_id, enabled)
+    async def get_reverse_cards(self, chat_id: int) -> bool:
+        """Return whether adding a word also creates the reversed card.
+
+        Defaults to True (the behaviour every chat had before the toggle
+        existed): ``/add``, "cat, kat" and multi-line pastes create both
+        word -> translation and translation -> word cards.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            True if the reversed card should be created
+        """
+        return await self._get_user_flag(chat_id, "reverse_cards", default=True)
+
+    async def set_reverse_cards(self, chat_id: int, enabled: bool) -> None:
+        """Enable or disable the reversed card on add for a chat.
+
+        Args:
+            chat_id: Telegram chat ID
+            enabled: Whether the reversed card should be created
+        """
+        await self._set_user_flag(chat_id, "reverse_cards", enabled)
+
+    async def get_daily_limit(self, chat_id: int) -> bool:
+        """Return whether the chat's daily practice pool is capped.
+
+        Defaults to True (67-76 due words a day, as before the toggle
+        existed). When False, every due word goes into today's pool.
+
+        Args:
+            chat_id: Telegram chat ID
+
+        Returns:
+            True if the daily limit applies to this chat
+        """
+        return await self._get_user_flag(chat_id, "daily_limit", default=True)
+
+    async def set_daily_limit(self, chat_id: int, enabled: bool) -> None:
+        """Enable or disable the daily practice limit for a chat.
+
+        Args:
+            chat_id: Telegram chat ID
+            enabled: Whether the daily pool should be capped
+        """
+        await self._set_user_flag(chat_id, "daily_limit", enabled)
 
     # Confident Words Operations
 

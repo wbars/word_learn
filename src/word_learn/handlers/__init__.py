@@ -6,6 +6,7 @@ from word_learn.handlers.alternative_ux import router as alternative_ux_router
 from word_learn.handlers.add_word import router as add_word_router
 from word_learn.handlers.add_words import router as add_words_router
 from word_learn.handlers.practice import router as practice_router
+from word_learn.handlers.preferences import router as preferences_router
 from word_learn.handlers.remind import router as remind_router
 from word_learn.handlers.reset import router as reset_router
 from word_learn.handlers.vocabulary_batches import router as vocabulary_batches_router
@@ -20,6 +21,7 @@ def setup_routers() -> Router:
     # Registered before add_word so the "delete" reply handler is checked
     # before the generic direct-text (add word) handler.
     main_router.include_router(alternative_ux_router)
+    main_router.include_router(preferences_router)
     main_router.include_router(add_word_router)
     main_router.include_router(add_words_router)
     main_router.include_router(practice_router)
